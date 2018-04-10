@@ -1,6 +1,4 @@
 import React from 'react';
-// import AddSource from '../containers/AddSource.js';
-
 
 /* ----------- Level 2 ------------- */
 
