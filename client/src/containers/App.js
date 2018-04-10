@@ -11,12 +11,40 @@ import AddSource from './AddSource.js';
 /* ----------- Level 1 ----------- */
 
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    this.state={
+      showLogin: false,
+      showAddSource: false
+    }
+    this.showLogin = this.showLogin.bind(this);
+    this.showAddSource = this.showAddSource.bind(this);
+  }
+
+  showLogin() {
+    this.setState({
+      showLogin: !this.state.showLogin
+    });
+  }
+
+  showAddSource() {
+    this.setState({
+      showAddSource: !this.state.showAddSource
+    })
+  }
+
+
   render() {
     return (
       <div className={ styles.App }>
-        <NavBar />
+        <NavBar showLogin={this.showLogin} showAddSource={this.showAddSource} />
+        {this.state.showLogin ? 
         <Login />
+         : null}
+        {this.state.showAddSource ?
         <AddSource />
+         : null}
         <Search />
         <Feed />
       </div>

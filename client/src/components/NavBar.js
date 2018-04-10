@@ -2,12 +2,12 @@ import React from 'react';
 
 /* ----------- Level 2 ------------- */
 
-const NavBar = (props) => {
+const NavBar = ({showLogin, showAddSource}) => {
 	return (
       <div className='navbar_container'>
         <p>Devterest</p>
-        <button>Login</button>
-        <button>Add</button>
+        <button onClick={() => showLogin()}>Login</button>
+        <button onClick={() => showAddSource()}>Add</button>
       </div>
 	); 
 };
