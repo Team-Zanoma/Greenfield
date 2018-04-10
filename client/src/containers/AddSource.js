@@ -17,7 +17,9 @@ class AddSource extends Component {
             <option> Video </option>
             <option> Article </option>
           </select>
+          <button type='submit'>Submit</button> 
          </div> 
+
         <div className='suggestedTags_container'>
           <input type='text' placeholder='Tag Name' />
         </div>

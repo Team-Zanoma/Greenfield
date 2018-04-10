@@ -7,8 +7,42 @@
   	margin: 0;
   	padding: 0;
   	font-family: sans-serif;
+
+
+    /* ------- Search Styling ------- */
+
+    .search_container{
+      background-color: rgba(0,0,0,0.8);
+      width: 60%;
+      height: 200px;
+      margin: auto;
+      margin-top: 100px;
+      padding-top: 50px;
+
+       .searchInput_container,  select {
+        margin: auto;
+      }
+
+      .searchInput_container {
+        width: 70%;
+        margin-bottom: 50px;
+
+        input {
+          width: 80%;
+        }
+
+        button {
+          width: 20%;
+        }
+      }
+
+      select {
+        display: block;
+        width: 40%;
+      }
+    }
   
-   /* -------- navbar styling ------- */
+   /* -------- navbar Styling ------- */
     .navbar_container {
       background-color: rgba(0,0,0,0.3);
       padding: 20px;
@@ -27,6 +61,7 @@
         height: 40px;
       }
     }
+
   
    /* -------- Login styling -------- */
    .login_container {
@@ -69,22 +104,31 @@
      height: 500px;
      margin: auto;
      margin-top: 100px;
-     padding-top: 100px;
+     padding-top: 75px;
 
      .link_container{
        width: 70%;
        margin: auto;
-       margin-bottom: 100px;
-
+       margin-bottom: 50px;
 
        input:first-child {
          height: 40px;
          width: 80%;
+         margin-bottom: 50px;
        }
 
        select {
          height: 40px;
          width: 20%;
+       }
+
+       button{
+         height: 40px;
+         width: 50%;
+         display: block;
+         margin: auto;
+         background-color: blue;
+         color: white;
        }
      }
 
