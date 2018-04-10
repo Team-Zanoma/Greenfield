@@ -1,0 +1,32 @@
+{
+  "name": "hrnyc14-greenfield",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrMustachos/hrnyc14-Greenfield.git"
+  },
+  "author": "team-zanoma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrMustachos/hrnyc14-Greenfield/issues"
+  },
+  "homepage": "https://github.com/mrMustachos/hrnyc14-Greenfield#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
+    "express": "^4.16.3",
+    "lodash": "^4.17.5",
+    "nodemon": "^1.17.3",
+    "request": "^2.85.0",
+    "request-promise-native": "^1.0.5"
+  }
+}
