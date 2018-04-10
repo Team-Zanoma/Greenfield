@@ -1,21 +1,16 @@
-import React from 'react';
+import { Component } from 'react';
 
 /* ---------- Level 3 ---------- */
 
-class AddSource extends React.Component{
-
-  constructor(props){
+class AddSource extends Component {
+  constructor(props) {
     super(props);
-    this.state = {
-
-    } 
+    this.state = {} 
   }
 
-  render(){
-  	return(
-
-  	)
+  render() {
+  	return;
   }
-}
+};
 
 export default AddSource;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Files from './Files.js';
+// import Files from './Files.js';
 
 let Feed = function(props){
 
