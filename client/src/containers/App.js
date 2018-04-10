@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../assets/images/logo.svg';
+// import logo from '../assets/images/logo.svg';
 import styles from '../assets/sass/App.module.scss';
 import Feed from '../components/Feed.js';
 import Search from './Search.js';
@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <div className={ styles.App }>
-        <Navbar />
+        <NavBar />
         <Search />
         <Feed />
       </div>

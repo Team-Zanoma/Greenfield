@@ -1,22 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 /* ----------- Level 3 ----------- */
 
-class Filter extends React.Component{
-
+class Filter extends Component {
   constructor(props){
     super(props);
-    this.state = {
-		
-	}
+    this.state = {}
   }
 
-  render(){
-  	return(
-      <div>
-
-      </div>
-  	)
+  render() {
+  	return (
+      <div></div>
+  	);
   }
 }
 

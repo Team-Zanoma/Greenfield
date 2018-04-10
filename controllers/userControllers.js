@@ -1,4 +1,4 @@
-const db = require('./database/index.js');
+const db = require('../database/');
 
 // exports.getAllTransactions = async (req, res) => {
 // 	const queryStr = '';
