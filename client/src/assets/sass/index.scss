@@ -68,9 +68,11 @@
      background-color: rgba(0,0,0,0.3);
      width: 80%;
      height: 500px;
-     margin: auto;
+     left: 50%;
+     transform: translateX(-50%);
      margin-top: 100px;
      padding-top: 150px;
+     position: absolute;
   
     /* --- Form --- */
      form {
@@ -102,9 +104,11 @@
      background-color: rgba(0,0,0,0.3);
      width: 80%;
      height: 500px;
-     margin: auto;
+     left: 50%;
+     transform: translateX(-50%);
      margin-top: 100px;
      padding-top: 75px;
+     position: absolute;
 
      .link_container{
        width: 70%;

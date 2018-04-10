@@ -16,10 +16,17 @@ class App extends Component {
     super(props);
     this.state={
       showLogin: false,
-      showAddSource: false
+      showAddSource: false,
+      linkList: []
     }
     this.showLogin = this.showLogin.bind(this);
     this.showAddSource = this.showAddSource.bind(this);
+  }
+
+  componentDidMount() {
+      this.setState({
+        linkList: sampleList
+      })
   }
 
   showLogin() {
@@ -46,10 +53,21 @@ class App extends Component {
         <AddSource />
          : null}
         <Search />
-        <Feed />
+        <Feed linkList={this.state.linkList} />
       </div>
     );
   }
 }
+
+let sampleList = [
+ {title: 'Intro to Javascript', url: '', likes: 1234, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'},
+ {title: 'Cracking the Coding Challenges', url: '', likes: 1004, shares: 85, description: 'Coding challenges got you in a jam?  Try out these simple problems that will have you cracking these challenges in no time'},
+ {title: 'Reactions to React', url: '', likes: 434, shares: 12, description: 'Now one of the most popular front-end frameworks in startups and large companies alike, React has many quirks and easter eggs that many developers have not used yet'},
+ {title: 'Intro to Javascript', url: '', likes: 134, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'},
+ {title: 'Intro to Javascript', url: '', likes: 1234, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'},
+ {title: 'Cracking the Coding Challenges', url: '', likes: 1004, shares: 85, description: 'Coding challenges got you in a jam?  Try out these simple problems that will have you cracking these challenges in no time'},
+ {title: 'Reactions to React', url: '', likes: 434, shares: 12, description: 'Now one of the most popular front-end frameworks in startups and large companies alike, React has many quirks and easter eggs that many developers have not used yet'},
+ {title: 'Intro to Javascript', url: '', likes: 134, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'}
+]
 
 export default App;
