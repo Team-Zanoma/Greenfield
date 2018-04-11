@@ -1,19 +1,21 @@
 const { knex } = require('../database/index');
 const urlMetadata = require('url-metadata');
+const _ = require('lodash');
 
 exports.getAllLinks = async (req, res) => {
 	const allLinks = await knex.select().from('links').orderBy('votes', 'desc');
 
-	for(let i = 0; i < allLinks.length; i++){
+	for (let i = 0; i < allLinks.length; i++) {
 		const tagsId = await knex('linksTags').select('tags_id').where({links_id: allLinks[i].id_links});
 		
-		for(let x = 0; x < tagsId.length; x++){
-          let tag = await knex('tags').select('tagName').where({id_tags: tagsId[x].tags_id});
-          if(allLinks[i].tagName && !allLinks[i].tagName.includes(tag[0].tagName)) {
-            allLinks[i].tagName.push(tag[0].tagName); 
-          } else {
-          	allLinks[i].tagName = [tag[0].tagName];
-          }
+		for (let x = 0; x < tagsId.length; x++) {
+      let tag = await knex('tags').select('tagName').where({id_tags: tagsId[x].tags_id});
+      if (allLinks[i].tagName) {
+        allLinks[i].tagName.push(tag[0].tagName); 
+      } else {
+      	allLinks[i].tagName = [tag[0].tagName];
+      }
+      allLinks[i].tagName = _.uniq(allLinks[i].tagName);
 		}
 	}
 
@@ -23,9 +25,12 @@ exports.getAllLinks = async (req, res) => {
 exports.addLink = async (req, res) => {
 	const { url, kind, votes, username, tagName } = req.body;
 
-    // Inserting meta data to links table
-    const metaData = await urlMetadata(url);
-   
+	try {
+		var metaData = await urlMetadata(url);
+	} catch(err) {
+		var metaData = {"og:title":"", "og:description":"", "og:image":""}
+	}
+ 
 	const isLink = await knex.select('url').from('links').where({ url: url });
 	const userId = await knex.select('id_users').from('users').where({ username: username });
 

@@ -6,7 +6,7 @@ exports.knex = knex({
   connection: {
     host : 'localhost',
     user : 'root',
-    password : 'Jkpywb98',
+    password : '',
     database : 'Devterest'
   }
 });
