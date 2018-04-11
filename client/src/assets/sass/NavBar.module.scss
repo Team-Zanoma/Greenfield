@@ -50,11 +50,10 @@
 
 .btn {
 	background-color: #ccc;
-	font-weight: 600;
 	color: #000;
 
 	&:hover {
-		background-color: darken(#ccc, 15%);
+		background-color: lighten(#ccc, 15%);
 	}
 
 	.btn__value {
@@ -68,12 +67,13 @@
 }
 
 .btn.add {
-	background-color: #fff;
+	background-color: #26a69a;
+	color: #fff;
 	margin-right: 20px;
 
 	&:hover {
-		background-color: darken(#fff, 5%);
-		color: #333;
+		background-color: #2bbbad;
+		color: #fff;
 	}
 
 	.btn__value {

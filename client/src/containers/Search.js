@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from '../assets/sass/Search.module.scss';
 // import Filter from './Filter.js';
 
 /* ---------- Level 2 ----------- */
@@ -11,10 +12,10 @@ class Search extends Component {
 
   render() {
     return (
-      <div className="search_container">
-        <div className="searchInput_container">
+      <div className={ styles.search_container }>
+        <div className={ styles.searchInput_container }>
           <input type="text" placeholder="Tag Name" />
-          <button type="button">Search</button>
+          <button className={`${ styles.btn } ${ styles.btn_big }`} type="button">Search</button>
         </div>
         <select>
           <option>Votes</option>
