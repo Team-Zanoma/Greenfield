@@ -15,7 +15,10 @@ CREATE TABLE links (
 	kind VARCHAR(50) NOT NULL,
 	votes int(20) DEFAULT 0,
 	shares int(20) DEFAULT 1,
-	addedAt DATETIME NOT NULL DEFAULT NOW()
+	addedAt DATETIME NOT NULL DEFAULT NOW(),
+	title VARCHAR(100),
+	description VARCHAR(255),
+	image VARCHAR(255)  
 );
 
 CREATE TABLE users (
