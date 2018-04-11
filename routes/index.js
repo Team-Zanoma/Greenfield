@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
-const userControllers = require('../controllers/userControllers');
+const linkControllers = require('../controllers/linkControllers');
+const usersControllers = require('../controllers/usersControllers');
+const tagsControllers = require('../controllers/tagsControllers');
 
 
-// router.get('/api/...', );
-// router.post('/api/...', );
+router.post('/api/links', tagsControllers.getTags, linkControllers.addLink);
+router.post('/api/users', usersControllers.addUser);
 
+router.get('/api/links', linkControllers.getAllLinks);
+router.get('/api/users', usersControllers.getAllUsers);
 
 module.exports = router;
