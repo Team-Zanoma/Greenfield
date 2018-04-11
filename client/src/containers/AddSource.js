@@ -10,18 +10,18 @@ class AddSource extends Component {
 
   render() {
   	return (
-      <div className='addSource_container'>
-        <div className='link_container'>
-          <input type='text' placeholder='Link' />
+      <div className="addSource_container">
+        <div className="link_container">
+          <input type="text" placeholder="Link" />
           <select>
-            <option> Video </option>
-            <option> Article </option>
+            <option>Video</option>
+            <option>Article</option>
           </select>
-          <button type='submit'>Submit</button> 
+          <button type="submit">Submit</button> 
          </div> 
 
-        <div className='suggestedTags_container'>
-          <input type='text' placeholder='Tag Name' />
+        <div className="suggestedTags_container">
+          <input type="text" placeholder="Tag Name" />
         </div>
       </div>
   	);

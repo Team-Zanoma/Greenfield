@@ -4,11 +4,11 @@ import React from 'react';
 
 const NavBar = ({showLogin, showAddSource}) => {
 	return (
-      <div className='navbar_container'>
-        <p>Devterest</p>
-        <button onClick={() => showLogin()}>Login</button>
-        <button onClick={() => showAddSource()}>Add</button>
-      </div>
+    <div className="navbar_container">
+      <p>Devterest</p>
+      <button onClick={() => showLogin()}>Login</button>
+      <button onClick={() => showAddSource()}>Add</button>
+    </div>
 	); 
 };
 

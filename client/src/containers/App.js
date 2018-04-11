@@ -14,7 +14,7 @@ class App extends Component {
 
   constructor(props){
     super(props);
-    this.state={
+    this.state = {
       showLogin: false,
       showAddSource: false,
       linkList: []
@@ -45,12 +45,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className={styles.App}>
-        <NavBar showLogin={this.showLogin} showAddSource={this.showAddSource} />
-        {this.state.showLogin ?  <Login /> : null}
-        {this.state.showAddSource ? <AddSource /> : null}
+      <div className={ styles.App }>
+        <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource } />
+        { this.state.showLogin ?  <Login /> : null }
+        { this.state.showAddSource ? <AddSource /> : null }
         <Search />
-        <Feed linkList={this.state.linkList} />
+        <Feed linkList={ this.state.linkList } />
       </div>
     );
   }
