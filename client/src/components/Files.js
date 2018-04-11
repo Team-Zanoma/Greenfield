@@ -6,7 +6,8 @@ import React from 'react';
 let Files = function({file}){
 
   return(
-  	<li>
+  	<li className='file_container'>
+      <img src={file.img} />
   	  <div>
   	    <h3><a href={file.url}>{file.title}</a></h3>
   	    <span>{file.description}</span>

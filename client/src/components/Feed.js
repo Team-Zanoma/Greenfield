@@ -8,7 +8,7 @@ let Feed = function({linkList}){
   });
 
   return(
-  	<div>
+  	<div className='feed_container'>
   	  <h2> Most Popular </h2>
   	    <ul>
           {entries}
