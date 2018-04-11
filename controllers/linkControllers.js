@@ -1,7 +1,7 @@
 const { knex } = require('../database/index');
 
 exports.getAllLinks = async (req, res) => {
-	const allLinks = await knex.select().from('links');
+	const allLinks = await knex.select().from('links').orderBy('votes', 'desc');
 	res.send(allLinks);
 };
 
@@ -25,10 +25,15 @@ exports.addLink = async (req, res) => {
 
 	for (let i = 0; i < tagName.length; i++) {
 		const tagId = await knex.select('id_tags').from('tags').where({ tagName: tagName[i]});
-		const addingToTagsJoin = await knex('LinksTags').insert({links_id: linkId[0].id_links, tags_id: tagId[0].id_tags });
+		const addingToTagsJoin = await knex('LinksTags').insert({ links_id: linkId[0].id_links, tags_id: tagId[0].id_tags });
 	}
 
 	res.send();
 };
 
-
+exports.upVote = async (req, res) => {
+	const { url } = req.body;
+	const votes = await knex('links').select('votes').where({ url: url});
+	const link = await knex('links').where({ url: url }).update({ votes: (votes[0].votes + 1) });
+	res.status(201).send();
+}
