@@ -23,10 +23,11 @@ class App extends Component {
     this.showAddSource = this.showAddSource.bind(this);
   }
 
+// render initial sources to Feed
   componentDidMount() {
-      this.setState({
-        linkList: sampleList
-      })
+    this.setState({
+      linkList: sampleList
+    });
   }
 
   showLogin() {
@@ -38,20 +39,16 @@ class App extends Component {
   showAddSource() {
     this.setState({
       showAddSource: !this.state.showAddSource
-    })
+    });
   }
 
 
   render() {
     return (
-      <div className={ styles.App }>
+      <div className={styles.App}>
         <NavBar showLogin={this.showLogin} showAddSource={this.showAddSource} />
-        {this.state.showLogin ? 
-        <Login />
-         : null}
-        {this.state.showAddSource ?
-        <AddSource />
-         : null}
+        {this.state.showLogin ?  <Login /> : null}
+        {this.state.showAddSource ? <AddSource /> : null}
         <Search />
         <Feed linkList={this.state.linkList} />
       </div>
