@@ -14,6 +14,7 @@ CREATE TABLE links (
 	url VARCHAR(255) NOT NULL,
 	kind VARCHAR(50) NOT NULL,
 	votes int(20) DEFAULT 0,
+	shares int(20) DEFAULT 1,
 	addedAt DATETIME NOT NULL DEFAULT NOW()
 );
 
@@ -26,21 +27,31 @@ CREATE TABLE users (
 
 CREATE TABLE tags (
 	id_tags int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	tagName VARCHAR(40) NOT NULL
+	tagName VARCHAR(40) NOT NULL UNIQUE
 );
 
 CREATE TABLE UsersLinks (
 	id_ul int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	links_id INT(10),
 	users_id INT(10),
-	FOREIGN KEY(links_id) REFERENCES links(id_links),
-	FOREIGN KEY(users_id) REFERENCES users(id_users)
+	FOREIGN KEY(links_id) REFERENCES links(id_links) ON DELETE CASCADE,
+	FOREIGN KEY(users_id) REFERENCES users(id_users) ON DELETE CASCADE
 );
 
 CREATE TABLE LinksTags (
 	id_lt int NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	links_id INT(10),
 	tags_id INT(10),
-	FOREIGN KEY(links_id) REFERENCES links(id_links),
-	FOREIGN KEY(tags_id) REFERENCES tags(id_tags)
+	FOREIGN KEY(links_id) REFERENCES links(id_links) ON DELETE CASCADE,
+	FOREIGN KEY(tags_id) REFERENCES tags(id_tags) ON DELETE CASCADE
 );
+
+
+
+INSERT INTO users (username, email) VALUES ('mrMustachos', "billdomanick@gmail.com");
+INSERT INTO users (username, email) VALUES ('pedrobarquinha', "barquinha.pedro@gmail.com");
+
+INSERT INTO links (url, kind) VALUES ('www.google.com', "video");
+
+
+
