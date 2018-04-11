@@ -24,8 +24,12 @@ exports.addLink = async (req, res) => {
 	}
 
 	for (let i = 0; i < tagName.length; i++) {
-		const tagId = await knex.select('id_tags').from('tags').where({ tagName: tagName[i]});
-		const addingToTagsJoin = await knex('LinksTags').insert({ links_id: linkId[0].id_links, tags_id: tagId[0].id_tags });
+		const tagId = await knex.select('id_tags').from('tags').where({ tagName: tagName[i] });
+		const isLinkTagged = await knex('LinksTags').select('links_id').where({ tags_id: tagId[0].id_tags });
+
+		if (!isLinkTagged.length) {
+			const addingToTagsJoin = await knex('LinksTags').insert({ links_id: linkId[0].id_links, tags_id: tagId[0].id_tags });
+		}
 	}
 
 	res.send();
@@ -37,3 +41,39 @@ exports.upVote = async (req, res) => {
 	const link = await knex('links').where({ url: url }).update({ votes: (votes[0].votes + 1) });
 	res.status(201).send();
 }
+
+exports.searchByTag = async (req, res) => {
+	const { tag } = req.query;
+	console.log(req.query)
+	const tagId = await knex('tags').select('id_tags').where({ tagName: tag });
+	const linkIds = await knex('LinksTags').select('links_id').where({ tags_id: tagId[0].id_tags });
+	let links = [];
+
+	for (let i = 0; i < linkIds.length; i++) {
+		let tempLink = await knex('links').select().where({ id_links: linkIds[i].links_id });
+		links.push(tempLink);
+	}
+
+	res.status(200).send(links);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

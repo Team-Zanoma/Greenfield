@@ -10,5 +10,7 @@ router.post('/api/upVote', linkControllers.upVote);
 
 router.get('/api/links', linkControllers.getAllLinks);
 router.get('/api/users', usersControllers.getAllUsers);
+router.get('/api/searchByTag', linkControllers.searchByTag);
+
 
 module.exports = router;
