@@ -4,7 +4,6 @@ const linkControllers = require('../controllers/linkControllers');
 const usersControllers = require('../controllers/usersControllers');
 const tagsControllers = require('../controllers/tagsControllers');
 
-
 router.post('/api/links', tagsControllers.getTags, linkControllers.addLink);
 router.post('/api/users', usersControllers.addUser);
 
