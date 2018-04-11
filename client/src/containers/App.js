@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import logo from '../assets/images/logo.svg';
 import styles from '../assets/sass/App.module.scss';
 import Feed from '../components/Feed.js';
 import Search from './Search.js';
