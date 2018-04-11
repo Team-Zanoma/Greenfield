@@ -1,0 +1,56 @@
+.file_container {
+	width: 75%;
+	margin: 0 auto 30px;
+	padding: 15px;
+	background: rgba(#42cffa, .5);
+	list-style-type: none;
+
+	&:after {
+		visibility: hidden;
+		display: block;
+		font-size: 0;
+		content: " ";
+		clear: both;
+		height: 0;
+	}
+
+	img {
+		float: left;
+		width: 30%;
+		padding-right: 30px;
+	}
+
+	.details {
+		float: right;
+		width: 70%;
+		padding-right: 10px;
+
+		h3 {
+			a {
+				color: #000;
+				text-decoration: none;
+			}
+		}
+	}
+
+	.metrics {
+		margin-top: 30px;
+
+		ul {
+			li {
+				list-style-type: none;
+				display: inline-block;
+				width: 30%;
+
+				span:first-of-type {
+					font-weight: 700;
+					padding-right: 10px;
+				}
+
+				span:last-of-type {
+					font-weight: 400;
+				}
+			}
+		}
+	}
+}

@@ -1,17 +1,17 @@
 import React from 'react';
 import Files from './Files.js';
 
-let Feed = function({linkList}){
-  
-  let entries = linkList.map((item) => {
-    return <Files file={item} />
-  });
+import styles from '../assets/sass/Feed.module.scss';
 
-  return(
-  	<div className='feed_container'>
-  	  <h2> Most Popular </h2>
+const Feed = ({ linkList }) => {
+  
+  let entries = linkList.map((item, i) => <Files key={ i } file={item} />);
+
+  return (
+  	<div className={ styles.feed_container }>
+  	  <h2>Most Popular</h2>
   	    <ul>
-          {entries}
+          { entries }
   	    </ul>
   	</div>
   	);

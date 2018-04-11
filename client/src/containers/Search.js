@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 /* ---------- Level 2 ----------- */
 
-class Search extends Component{
+class Search extends Component {
   constructor(props) {
     super(props);
 	  this.state = {}
@@ -11,10 +11,10 @@ class Search extends Component{
 
   render() {
     return (
-      <div className='search_container'>
-        <div className='searchInput_container'>
-          <input type='text' placeholder='Tag Name' />
-          <button type='button'>Search</button>
+      <div className="search_container">
+        <div className="searchInput_container">
+          <input type="text" placeholder="Tag Name" />
+          <button type="button">Search</button>
         </div>
         <select>
           <option>Votes</option>

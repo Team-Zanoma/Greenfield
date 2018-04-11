@@ -1,3 +1,8 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+
 
 *{
   box-sizing: border-box;
@@ -146,40 +151,35 @@
    }
     
     /* ------- Feed Container ------ */ 
-    .feed_container {
-      margin: auto;
-      margin-top: 50px;
+    // .feed_container {
+    //   margin: auto;
+    //   margin-top: 50px;
 
-      h2 {
-        text-align: center;
-      }
+    //   h2 {
+    //     text-align: center;
+    //   }
 
-      ul {
-        list-style: none;
+    //   ul {
+    //     list-style: none;
 
-        img {
-            width: 100px;
-            height: auto;
-            display: block;
-            float: right;
-          }
+    //     img {
+    //         width: 100px;
+    //         height: auto;
+    //         display: block;
+    //         float: right;
+    //       }
 
-        .file_container {
-          background-color: white;
-          width: 50%;
-          margin: auto;
-          background-color: rgba(65,207,250, 0.4);
-          padding: 5px;
-          margin-bottom: 15px;
+    //     .file_container {
+    //       background-color: white;
+    //       width: 50%;
+    //       margin: auto;
+    //       background-color: rgba(65,207,250, 0.4);
+    //       padding: 5px;
+    //       margin-bottom: 15px;
 
-        }
-      }
-
-
-    }
-
-
-
+    //     }
+    //   }
+    // }
   }
 }
 
