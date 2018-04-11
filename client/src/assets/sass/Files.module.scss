@@ -28,6 +28,10 @@
 		padding-right: 10px;
 
 		h3 {
+			font-family: 'Patua One', sans-serif;
+			margin: 15px 0;
+			font-size: 20px;
+
 			a {
 				color: #000;
 				text-decoration: none;
@@ -42,7 +46,11 @@
 			li {
 				list-style-type: none;
 				display: inline-block;
-				width: 30%;
+				margin-right: 30px;
+
+				&:last-of-type {
+					margin-right: 0;
+				}
 
 				span {
 					line-height: 1.3rem;
