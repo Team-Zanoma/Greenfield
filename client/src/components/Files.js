@@ -17,11 +17,11 @@ const Files = ({ file }) => {
   	    <div className={ styles.metrics }>
           <ul>
             <li>
-              <span className="title">Likes</span>
+              <span className="title"><i className={ styles.share__icon }>star</i>Likes</span>
               <span className="count">{ file.likes }</span>
             </li>
             <li>
-              <span className="title">Shares</span>
+              <span className="title"><i className={ styles.share__icon }>share</i>Shares</span>
               <span className="count">{ file.shares }</span>
             </li>
           </ul>
