@@ -11,7 +11,17 @@ class Search extends Component{
 
   render() {
     return (
-      <div></div>
+      <div className='search_container'>
+        <div className='searchInput_container'>
+          <input type='text' placeholder='Tag Name' />
+          <button type='button'>Search</button>
+        </div>
+        <select>
+          <option>Votes</option>
+          <option>Length</option>
+          <option>Tags</option>
+        </select> 
+      </div>
     );
   }
 }

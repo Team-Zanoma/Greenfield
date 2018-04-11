@@ -51,7 +51,5 @@ CREATE TABLE LinksTags (
 INSERT INTO users (username, email) VALUES ('mrMustachos', "billdomanick@gmail.com");
 INSERT INTO users (username, email) VALUES ('pedrobarquinha', "barquinha.pedro@gmail.com");
 
-INSERT INTO links (url, kind) VALUES ('www.google.com', "video");
-
 
 
