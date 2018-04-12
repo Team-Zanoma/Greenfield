@@ -7,6 +7,11 @@ exports.getAllUsers = async (req, res) => {
 
 exports.addUser = async (req, res) => {
 	const { username, email } = req.body;
-	const result = await knex('users').insert({ username: username, email: email });
-	res.send(result);
+  const isUser = await knex('users').select('username').where({ username: username, email: email });
+
+  if (!isUser.length) {
+    const result = await knex('users').insert({ username: username, email: email });
+  }
+
+	res.send();
 };
