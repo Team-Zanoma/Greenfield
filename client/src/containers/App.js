@@ -33,7 +33,8 @@ class App extends Component {
 
     this.handleAddSource = this.handleAddSource.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
-    this.handleFeedTitleChange = this.handleFeedTitleChange.bind(this)
+    this.handleFeedTitleChange = this.handleFeedTitleChange.bind(this);
+    this.sortLinksBy = this.sortLinksBy.bind(this);
   }
 
   getAllinks() {
@@ -164,13 +165,32 @@ class App extends Component {
   }
 
   handleFeedTitleChange(title) {
-    console.log(title)
     this.setState({
       searchTitle: title
     })
   }
 
+  sortLinksBy(criteria) {
+    const links = this.state.linkList;
+    const crit = criteria;
+
+    const sorted = links.sort((linkA, linkB) => {
+      if (linkA[crit] < linkB[crit]) {
+        return 1;
+      } 
+      if (linkA[crit] > linkB[crit]) {
+        return -1;
+      }
+      return 0;
+    });
+
+    this.setState({
+      linkList: sorted
+    });
+  }
+
   render() {
+
     return (
       <div className={ styles.App }>
         <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
@@ -183,7 +203,7 @@ class App extends Component {
             />)
           : (null)
         }
-        <Search handleFeedTitleChange={ this.handleFeedTitleChange } handleSearchByTag={ this.handleSearchByTag } handleSearchByTitle={ this.handleSearchByTitle }/>
+        <Search sort={ this.sortLinksBy } handleFeedTitleChange={ this.handleFeedTitleChange } handleSearchByTag={ this.handleSearchByTag } handleSearchByTitle={ this.handleSearchByTitle }/>
         <Feed title={ this.state.searchTitle } handleUpVote={ this.handleUpVote } linkList={ this.state.linkList } />
       </div>
     );
