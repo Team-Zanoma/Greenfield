@@ -39,7 +39,9 @@ class AddSource extends Component {
   	return (
       <div className={ styles.addSource_overlay }>
         <div className={ styles.addSource_container }>
-         <button onClick={ this.props.showAddSource }> Exit </button>
+         <button className={`${ styles.btn } ${ styles.close }`} onClick={ this.props.showAddSource }>
+          <i className={ styles.btn__icon }>close</i>
+         </button>
           <div className={ styles.link_container }>
             <label htmlFor="link">
               <span className={ styles.label }>Share Link</span>
