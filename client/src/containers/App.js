@@ -17,11 +17,14 @@ class App extends Component {
     this.state = {
       showLogin: false,
       showAddSource: false,
-      linkList: []
+      linkList: [],
+      username: ''
     }
+    
     this.showLogin = this.showLogin.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.showAddSource = this.showAddSource.bind(this);
+    this.getUsername = this.getUsername.bind(this);
   }
 
 // render initial sources to Feed
@@ -47,12 +50,21 @@ class App extends Component {
     console.log('username in handleLogin() is: ', username, email)
     axios.post('/api/users', {username, email})
     .then((results) => {
+      this.getUsername(username);
       console.log('success in handleLogin() axios post request');
     })
     .catch((error) => {
       console.log('error in handleLogin(), error is: ', error);
     })
+  }
 
+  getUsername(username) {
+    axios.get('/api/users', {params: {username}})
+    .then((data) => {
+      this.setState({
+        username: data.username
+      })
+    })
   }
 
 
