@@ -44,7 +44,6 @@ exports.addTagsToLinks = async (allLinks, cb) => {
 
 exports.addLink = async (req, res) => {
 	const { url, kind, votes, username, tagName } = req.body;
-	console.log(req.body.username);
 
 	try {
 		var metaData = await urlMetadata(url);
