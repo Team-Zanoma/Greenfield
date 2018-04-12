@@ -59,6 +59,15 @@ exports.addLink = async (req, res) => {
 	const userId = await knex.select('id_users').from('users').where({ username });
 
 	if (isLink.length === 0) {
+
+		if (metaData['og:image'] === "") {
+			// metaData['og:image'] = 'https://stackoverflow.blog/wp-content/uploads/2017/12/SE_pattern.png';
+			metaData['og:image'] = '/images/defaultImg.png';
+		}
+		if (metaData['og:title'] === "") {
+			metaData['og:title'] = url;
+		}
+
 		const addingLink = await knex('links').insert({
 			url: url,
 			kind: kind,
