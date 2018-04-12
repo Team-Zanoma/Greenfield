@@ -27,10 +27,14 @@ class Search extends Component {
         <div className={ styles.searchInput_container }>
           <input value={ this.state.inputValue } 
             onChange={ (event) => this.handleChange(event) } 
-            type="text" placeholder={this.state.searchBy} 
+            type="text" placeholder={ this.state.searchBy } 
           />
           <button
-            onClick={ () => this.state.searchBy === 'Tags' ? this.props.handleSearchByTag(this.state.inputValue) : this.props.handleSearchByTitle(this.state.inputValue) }
+            onClick={ () => {
+              this.state.searchBy === 'Tags' ? this.props.handleSearchByTag(this.state.inputValue) : this.props.handleSearchByTitle(this.state.inputValue)
+              if (this.state.inputValue !== '') this.props.handleFeedTitleChange('search results for: ' + this.state.inputValue)
+              else this.props.handleFeedTitleChange('Most Popular')
+            }}
             className={`${ styles.btn } ${ styles.btn_big }`}
             type="button"
           >
