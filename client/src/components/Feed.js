@@ -1,6 +1,5 @@
 import React from 'react';
 import Files from './Files.js';
-
 import styles from '../assets/sass/Feed.module.scss';
 
 const Feed = ({ linkList, handleUpVote, title }) => {
