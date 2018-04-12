@@ -5,6 +5,7 @@ import Search from './Search.js';
 import NavBar from '../components/NavBar.js';
 import Login from './Login.js';
 import AddSource from './AddSource.js';
+import axios from 'axios';
 
 
 /* ----------- Level 1 ----------- */
@@ -19,6 +20,7 @@ class App extends Component {
       linkList: []
     }
     this.showLogin = this.showLogin.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
     this.showAddSource = this.showAddSource.bind(this);
   }
 
@@ -41,12 +43,24 @@ class App extends Component {
     });
   }
 
+  handleLogin(username, email) {
+    console.log('username in handleLogin() is: ', username, email)
+    axios.post('/api/users', {username, email})
+    .then((results) => {
+      console.log('success in handleLogin() axios post request');
+    })
+    .catch((error) => {
+      console.log('error in handleLogin(), error is: ', error);
+    })
+
+  }
+
 
   render() {
     return (
       <div className={ styles.App }>
         <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource } />
-        { this.state.showLogin ?  <Login /> : null }
+        { this.state.showLogin ?  <Login handleLogin={this.handleLogin} /> : null }
         { this.state.showAddSource ? <AddSource /> : null }
         <Search />
         <Feed linkList={ this.state.linkList } />
