@@ -20,11 +20,14 @@ class App extends Component {
       linkList: [],
       username: ''
     }
-    
+
     this.showLogin = this.showLogin.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.showAddSource = this.showAddSource.bind(this);
     this.getUsername = this.getUsername.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleAddSource = this.handleAddSource.bind(this);
+    this.handleUpVote = this.handleUpVote.bind(this);
   }
 
 // render initial sources to Feed
@@ -57,7 +60,7 @@ class App extends Component {
       console.log('error in handleLogin(), error is: ', error);
     })
   }
-
+ 
   getUsername(username) {
     axios.get('/api/users', {params: {username}})
     .then((data) => {
@@ -67,23 +70,56 @@ class App extends Component {
     })
   }
 
+  handleAddSource(tagNames, url, type){
+  var tagsArray = tagNames.split(',');
+
+  axios.post('/api/links', {tagsArray, url, type})
+  .then((data) => {
+    console.log(data);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  }
+
+  //function to retrieve tags from server on search
+  handleSearch(tag) {
+    axios.get('/api/searchByTag',{params: {tag}})
+    .then((data) => {
+    console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+  handleUpVote(url) {
+    axios.post('/api/upvote', {url})
+    .then((response) => {
+      console.log('success');
+    })
+    .catch((error) => {
+      console.log('error');
+    })
+  }
+
 
   render() {
     return (
       <div className={ styles.App }>
         <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource } />
         { this.state.showLogin ?  <Login handleLogin={this.handleLogin} /> : null }
-        { this.state.showAddSource ? <AddSource /> : null }
-        <Search />
-        <Feed linkList={ this.state.linkList } />
+        { this.state.showAddSource ? <AddSource handleAddSource={this.handleAddSource} /> : null }
+        <Search handleSearch={this.handleSearch} />
+        <Feed handleUpVote={this.handleUpVote} linkList={ this.state.linkList } />
       </div>
     );
   }
 }
 
 let sampleList = [
- {title: 'Intro to Javascript', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png',  url: '', likes: 1234, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'},
- {title: 'Cracking the Coding Challenges', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: '', likes: 1004, shares: 85, description: 'Coding challenges got you in a jam?  Try out these simple problems that will have you cracking these challenges in no time'},
+ {title: 'Intro to Javascript', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png',  url: 'www.google.com', likes: 1234, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'},
+ {title: 'Cracking the Coding Challenges', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: 'www.weather.com', likes: 1004, shares: 85, description: 'Coding challenges got you in a jam?  Try out these simple problems that will have you cracking these challenges in no time'},
  {title: 'Reactions to React', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: '', likes: 434, shares: 12, description: 'Now one of the most popular front-end frameworks in startups and large companies alike, React has many quirks and easter eggs that many developers have not used yet'},
  {title: 'Intro to Javascript', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: '', likes: 134, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'},
  {title: 'Intro to Javascript', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: '', likes: 1234, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'},
