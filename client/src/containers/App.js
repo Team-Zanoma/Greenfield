@@ -26,8 +26,10 @@ class App extends Component {
 
     this.handleLogin = this.handleLogin.bind(this);
     this.showAddSource = this.showAddSource.bind(this);
+
     this.handleSearchByTag = this.handleSearchByTag.bind(this);
     this.handleSearchByTitle = this.handleSearchByTitle.bind(this);
+
     this.handleAddSource = this.handleAddSource.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
   }
@@ -92,7 +94,6 @@ class App extends Component {
       }
     );
   }
-
   // handles the hiding/showing of the login popup
   showLogin() {
     this.setState({
