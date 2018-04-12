@@ -8,7 +8,8 @@ class Search extends Component {
   constructor(props) {
     super(props);
 	  this.state = {
-      inputValue: '' 
+      inputValue: '',
+      searchBy: 'Tags' 
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,19 +25,21 @@ class Search extends Component {
     return (
       <div className={ styles.search_container }>
         <div className={ styles.searchInput_container }>
-          <input value={this.state.inputValue} onChange={(event) => this.handleChange(event)} type="text" placeholder="Tag Name" />
+          <input value={ this.state.inputValue } 
+            onChange={ (event) => this.handleChange(event) } 
+            type="text" placeholder={this.state.searchBy} 
+          />
           <button
-            onClick={ () => this.props.handleSearch(this.state.inputValue) }
+            onClick={ () => this.state.searchBy === 'Tags' ? this.props.handleSearchByTag(this.state.inputValue) : this.props.handleSearchByTitle(this.state.inputValue) }
             className={`${ styles.btn } ${ styles.btn_big }`}
             type="button"
           >
             Search
           </button>
         </div>
-        <select>
-          <option>Votes</option>
-          <option>Length</option>
+        <select onChange={ (event) => this.setState({ searchBy: event.target.value }) }>
           <option>Tags</option>
+          <option>Title</option>
         </select> 
       </div>
     );

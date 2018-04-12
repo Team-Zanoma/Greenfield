@@ -26,7 +26,8 @@ class App extends Component {
 
     this.handleLogin = this.handleLogin.bind(this);
     this.showAddSource = this.showAddSource.bind(this);
-    this.handleSearch = this.handleSearch.bind(this);
+    this.handleSearchByTag = this.handleSearchByTag.bind(this);
+    this.handleSearchByTitle = this.handleSearchByTitle.bind(this);
     this.handleAddSource = this.handleAddSource.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
   }
@@ -58,11 +59,27 @@ class App extends Component {
     );
   }
 
-  handleSearch(tag) {
+  handleSearchByTag(tag) {
     let tagsArray = tag.trim().split(',');
 
     axios.get('/api/searchByTag', {
       params: { tag: tagsArray }
+    })
+      .then((results) => {
+        console.log(results.data);
+        this.setState({
+          linkList: results.data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  handleSearchByTitle(title) {
+    axios.get('/api/searchByTitle', {
+      params: { title: title }
     })
       .then((results) => {
         console.log(results.data);
@@ -140,7 +157,7 @@ class App extends Component {
         <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
         { this.state.showLogin ?  <Login handleLogin={ this.handleLogin } /> : null }
         { this.state.showAddSource ? <AddSource handleAddSource={ this.handleAddSource } /> : null }
-        <Search handleSearch={ this.handleSearch } />
+        <Search handleSearchByTag={ this.handleSearchByTag } handleSearchByTitle={ this.handleSearchByTitle }/>
         <Feed handleUpVote={ this.handleUpVote } linkList={ this.state.linkList } />
       </div>
     );

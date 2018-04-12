@@ -8,7 +8,7 @@ const Files = ({ file, handleUpVote }) => {
 
   return (
   	<li className={ styles.file_container }>
-      <img src={ file.img } alt="" />
+      <img src={ file.image } alt="" />
   	  <div className={ styles.details }>
   	    <h3>
           <a href={ file.url }>{ file.title }</a>
