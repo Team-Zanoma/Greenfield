@@ -10,6 +10,17 @@
 	padding: 0 15px;
 	margin: 20px auto;
 
+	.sortRadios {
+		display: block;
+		text-align: center;
+		margin-top: 15px;
+
+		h4 {
+			display: inline-block;
+			margin: 0 10px 0 0;
+		}
+	}
+
 	.searchInput_container {
 		text-align: center;
 		vertical-align: top;
