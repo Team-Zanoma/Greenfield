@@ -1,6 +1,13 @@
 const { knex } = require('../database/index');
 const urlMetadata = require('url-metadata');
 const _ = require('lodash');
+const fs = require('fs');
+
+// const defaultImg = fs.readFile('../client/public/images/defaultImg.png', (err, data) => {
+//   console.log(data);
+//   if (err) throw err;
+// });
+// console.log(defaultImg)
 
 exports.getAllLinks = async (req, res) => {
 	const by = req.query.by || 'votes'; 
@@ -44,7 +51,6 @@ exports.addTagsToLinks = async (allLinks, cb) => {
 
 exports.addLink = async (req, res) => {
 	const { url, kind, votes, username, tagName } = req.body;
-	console.log(req.body.username);
 
 	try {
 		var metaData = await urlMetadata(url);
@@ -60,6 +66,14 @@ exports.addLink = async (req, res) => {
 	const userId = await knex.select('id_users').from('users').where({ username });
 
 	if (isLink.length === 0) {
+
+		if (metaData['og:image'] === "") {
+			metaData['og:image'] = 'https://stackoverflow.blog/wp-content/uploads/2017/12/SE_pattern.png';
+		}
+		if (metaData['og:title'] === "") {
+			metaData['og:title'] = url;
+		}
+
 		const addingLink = await knex('links').insert({
 			url: url,
 			kind: kind,

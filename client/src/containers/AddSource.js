@@ -57,8 +57,8 @@ class AddSource extends Component {
             </label>
             <label htmlFor="type">
               <span className={ styles.label } id="type">Link Type</span>
-              <select onChange={ (event) => this.handleTypeChange(event) }>
-                <option disabled selected>Resource Type</option>
+              <select onChange={ (event) => this.handleTypeChange(event) } defaultValue={''}>
+                <option value='' disabled>Resource Type</option>
                 <option value='Video'>Video</option>
                 <option value='Article'>Article</option>
               </select>

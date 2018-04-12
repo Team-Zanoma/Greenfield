@@ -138,11 +138,12 @@ class App extends Component {
   }
  
 
-  handleAddSource(tagNames, url, type) {
-    let tagsArray = tagNames.trim().split(',');
-    axios.post('/api/links', { tagsArray, url, type, username: 'pedrobarquinha' })
+  handleAddSource(tagNames, url, kind, username) {
+    let tagsArray = tagNames.replace(/, /g, ',').split(',');
+    axios.post('/api/links', { tagName: tagsArray, url, kind, username })
       .then((data) => {
-        console.log(data);
+        this.getAllinks();
+        return this.showAddSource();
       })
       .catch((error) => {
         console.log(error);
