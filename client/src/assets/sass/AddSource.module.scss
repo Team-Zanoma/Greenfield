@@ -1,0 +1,41 @@
+@import 'button';
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.addSource_overlay {
+	background: rgba(#000, .8);
+	position: absolute;
+	height: 100vh;
+	width: 100vw;
+	top: 0;
+	left: 0;
+	right: 0;
+}
+
+
+.addSource_container {
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%, -25%);
+	background: #fff;
+	padding: 30px;
+	border-radius: 3px;
+	width: 90%;
+	max-width: 600px;
+
+	label {
+		display: block;
+
+		.label {
+			margin-right: 10px;
+		}
+	}
+
+	.btnBar {
+		margin-top: 30px;
+		text-align: right;
+	}
+}

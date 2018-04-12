@@ -1,0 +1,94 @@
+@import 'material_icon';
+
+.file_container {
+	width: 75%;
+	margin: 0 auto 30px;
+	padding: 15px;
+	background: rgba(#42cffa, .5);
+	list-style-type: none;
+
+	&:after {
+		visibility: hidden;
+		display: block;
+		font-size: 0;
+		content: " ";
+		clear: both;
+		height: 0;
+	}
+
+	img {
+		float: left;
+		width: 30%;
+		padding-right: 30px;
+	}
+
+	.details {
+		float: right;
+		width: 70%;
+		padding-right: 10px;
+
+		h3 {
+			font-family: 'Patua One', sans-serif;
+			margin: 15px 0;
+			font-size: 20px;
+
+			a {
+				color: #000;
+				text-decoration: none;
+			}
+		}
+	}
+
+	.metrics {
+		margin-top: 30px;
+
+		ul {
+			li {
+				list-style-type: none;
+				display: inline-block;
+				margin-right: 30px;
+
+				&:last-of-type {
+					margin-right: 0;
+				}
+
+				span {
+					line-height: 1.3rem;
+				}
+
+				span:first-of-type {
+					font-weight: 700;
+					padding-right: 10px;
+				}
+
+				span:last-of-type {
+					font-weight: 400;
+				}
+			}
+		}
+	}
+}
+
+.share__icon {
+	text-rendering: optimizeLegibility;
+	-webkit-font-feature-settings: 'liga';
+	-moz-font-feature-settings: 'liga';
+	font-feature-settings: 'liga';
+	font-family: 'Material Icons';
+	font-weight: normal;
+	font-style: normal;
+	font-size: 24px;
+	line-height: 1;
+	letter-spacing: normal;
+	text-transform: none;
+	display: inline-block;
+	white-space: nowrap;
+	word-wrap: normal;
+	direction: ltr;
+	-webkit-font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
+	font-size: 1.28rem;
+	line-height: inherit;
+	float: left;
+	margin-right: 5px;
+}

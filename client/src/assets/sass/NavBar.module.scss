@@ -1,0 +1,88 @@
+@import 'button';
+
+
+.navbar_container {
+	width: 100%;
+	padding: 10px 0;
+	background: #cb0814;
+
+	.container {
+		width: 100%;
+		max-width: 1040px;
+		padding: 0 15px;
+		margin: 0 auto;
+
+		&:after {
+			visibility: hidden;
+			display: block;
+			font-size: 0;
+			content: " ";
+			clear: both;
+			height: 0;
+		}
+	}
+}
+
+.logo {
+	vertical-align: top;
+	line-height: 40px;
+	display: inline;
+
+	img {
+		max-width: 40px;
+	}
+	.name {
+		font-family: 'Patua One', sans-serif;
+		font-weight: 400;
+		padding-left: 10px;
+		letter-spacing: .75px;
+		padding: 9px 10px;
+		padding-right: 0;
+		vertical-align: top;
+		font-size: 26px;
+		color: #fff;
+	}
+}
+
+.btnBar {
+	float: right;
+	line-height: 40px;
+}
+
+.btn {
+	background-color: #ccc;
+	color: #000;
+
+	&:hover {
+		background-color: lighten(#ccc, 15%);
+	}
+
+	.btn__value {
+		float: left;
+	}
+
+	.btn__icon {
+		float: right;
+		margin: 0 0 0 10px;
+	}
+}
+
+.btn.add {
+	background-color: #26a69a;
+	color: #fff;
+	margin-right: 20px;
+
+	&:hover {
+		background-color: #2bbbad;
+		color: #fff;
+	}
+
+	.btn__value {
+		float: right;
+	}
+
+	.btn__icon {
+		float: left;
+		margin: 0 10px 0 0;
+	}
+}
