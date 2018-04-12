@@ -17,7 +17,8 @@ class App extends Component {
       showLogin: false,
       showAddSource: false,
       linkList: [],
-      username: []
+      username: [],
+      searchTitle: 'Most Popular'
     }
 
     this.getAllinks = this.getAllinks.bind(this);
@@ -32,6 +33,7 @@ class App extends Component {
 
     this.handleAddSource = this.handleAddSource.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
+    this.handleFeedTitleChange = this.handleFeedTitleChange.bind(this)
   }
 
   getAllinks() {
@@ -62,6 +64,10 @@ class App extends Component {
   }
 
   handleSearchByTag(tag) {
+    if (tag === '') {
+      this.getAllinks();
+      return;
+    }
     let tagsArray = tag.trim().split(',');
 
     axios.get('/api/searchByTag', {
@@ -80,6 +86,11 @@ class App extends Component {
   }
 
   handleSearchByTitle(title) {
+    if (title === '') {
+      this.getAllinks();
+      return;
+    }
+
     axios.get('/api/searchByTitle', {
       params: { title: title }
     })
@@ -151,6 +162,12 @@ class App extends Component {
     );
   }
 
+  handleFeedTitleChange(title) {
+    console.log(title)
+    this.setState({
+      searchTitle: title
+    })
+  }
 
   render() {
     return (
@@ -165,8 +182,8 @@ class App extends Component {
             />)
           : (null)
         }
-        <Search handleSearchByTag={ this.handleSearchByTag } handleSearchByTitle={ this.handleSearchByTitle }/>
-        <Feed handleUpVote={ this.handleUpVote } linkList={ this.state.linkList } />
+        <Search handleFeedTitleChange={ this.handleFeedTitleChange } handleSearchByTag={ this.handleSearchByTag } handleSearchByTitle={ this.handleSearchByTitle }/>
+        <Feed title={ this.state.searchTitle } handleUpVote={ this.handleUpVote } linkList={ this.state.linkList } />
       </div>
     );
   }
