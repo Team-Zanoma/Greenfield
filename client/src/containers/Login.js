@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 /* ----------- Level 3 ----------- */
 
-class Login extends React.Component{
-
-  constructor(props){
+class Login extends Component {
+  constructor(props) {
     super(props);
-	  this.state = {
-		
-	  }
+	  this.state = {}
   }
 
-  render(){
-  	return(
-  	  <div className='login_container'>
+  render() {
+  	return (
+  	  <div className="login_container">
         <form>
-          <input type='text' placeholder='Username' />
-          <input type='password' placeholder='Password' />
-          <input type='button' value='Login' />
+          <input type="text" placeholder="Username" />
+          <input type="password" placeholder="Password" />
+          <input type="button" value="Login" />
         </form>
   	  </div>
   	)

@@ -1,0 +1,21 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.feed_container {
+	width: 100%;
+	max-width: 1040px;
+	margin: 50px auto;
+	padding: 0 15px;
+
+	ul {
+		margin: 0;
+		padding: 0;
+	}
+
+	h2 {
+		font-family: 'Patua One', sans-serif;
+		text-align: center;
+		font-size: 36px;
+	}
+}
