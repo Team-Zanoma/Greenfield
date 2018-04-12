@@ -4,12 +4,17 @@ const _ = require('lodash');
 
 exports.getAllLinks = async (req, res) => {
 	const allLinks = await knex.select().from('links').orderBy('votes', 'desc');
-
 	exports.addTagsToLinks(allLinks, (linksWithTags) => {
 		res.send(linksWithTags);
 	});
 };
 
+exports.getLinksByDate = async (req, res) => {
+	const allLinks = await knex.select().from('links').orderBy('id_links', 'desc');
+	exports.addTagsToLinks(allLinks, (linksWithTags) => {
+		res.send(linksWithTags);
+	});
+}
 
 exports.addTagsToLinks = async (allLinks, cb) => {
 		for (let i = 0; i < allLinks.length; i++) {
@@ -91,14 +96,28 @@ exports.searchByTag = async (req, res) => {
 			links.push(tempLink[0]);
 		}	
 	}	
-
 	exports.addTagsToLinks(links, (linksWithTags) => {
 		res.status(200).send(linksWithTags);
 	})
 }
 
 
+exports.searchByTitle = async (req, res) => {
+	const allLinks = await knex.select().from('links').orderBy('votes', 'desc');
+	var { title } = req.query;
+	title = title.toLowerCase();
+	const matches = [];
 
+	exports.addTagsToLinks(allLinks, (linksWithTags) => {
+		for (let i = 0; i < allLinks.length; i++) {
+			let currTitle = allLinks[i].title.toLowerCase();
+			if (currTitle.indexOf(title) > -1) {
+				matches.push(allLinks[i]);
+			}
+		}
+		res.send(matches);
+	});
+}
 
 
 
