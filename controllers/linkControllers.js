@@ -13,7 +13,7 @@ exports.getAllLinks = async (req, res) => {
 
 exports.addTagsToLinks = async (allLinks, cb) => {
 		for (let i = 0; i < allLinks.length; i++) {
-			const tagsId = await knex('linksTags').select('tags_id').where({links_id: allLinks[i].id_links || '' });
+			const tagsId = await knex('LinksTags').select('tags_id').where({links_id: allLinks[i].id_links || '' });
 			
 			for (let x = 0; x < tagsId.length; x++) {
 	      let tag = await knex('tags').select('tagName').where({id_tags: tagsId[x].tags_id});
