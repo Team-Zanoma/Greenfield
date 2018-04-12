@@ -7,20 +7,43 @@ import styles from '../assets/sass/Search.module.scss';
 class Search extends Component {
   constructor(props) {
     super(props);
-	  this.state = {}
+	  this.state = {
+      inputValue: '',
+      searchBy: 'Tags' 
+    }
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      inputValue: event.target.value
+    });
   }
 
   render() {
     return (
       <div className={ styles.search_container }>
         <div className={ styles.searchInput_container }>
-          <input type="text" placeholder="Tag Name" />
-          <button className={`${ styles.btn } ${ styles.btn_big }`} type="button">Search</button>
+          <input value={ this.state.inputValue } 
+            onChange={ (event) => this.handleChange(event) } 
+            type="text" placeholder={ this.state.searchBy } 
+          />
+          <button
+            onClick={ () => {
+              this.state.searchBy === 'Tags' ? this.props.handleSearchByTag(this.state.inputValue) : this.props.handleSearchByTitle(this.state.inputValue)
+              if (this.state.inputValue !== '') this.props.handleFeedTitleChange('search results for: ' + this.state.inputValue)
+              else this.props.handleFeedTitleChange('Most Popular')
+            }}
+            className={`${ styles.btn } ${ styles.btn_big }`}
+            type="button"
+          >
+            Search
+          </button>
         </div>
-        <select>
-          <option>Votes</option>
-          <option>Length</option>
+        <select onChange={ (event) => this.setState({ searchBy: event.target.value }) }>
           <option>Tags</option>
+          <option>Title</option>
         </select> 
       </div>
     );

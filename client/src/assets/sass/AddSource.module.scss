@@ -39,3 +39,22 @@
 		text-align: right;
 	}
 }
+
+.btn.close {
+	background-color: #cb0814;
+	color: #fff;
+	border-radius: 100%;
+	padding: 0 8px;
+	position: absolute;
+	top: -15px;
+	right: -15px;
+
+	&:hover {
+		background-color: lighten(#cb0814, 15%);
+		color: #fff;
+	}
+
+	.btn__icon {
+		margin: 0;
+	}
+}
