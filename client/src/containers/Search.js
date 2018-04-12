@@ -25,7 +25,13 @@ class Search extends Component {
       <div className={ styles.search_container }>
         <div className={ styles.searchInput_container }>
           <input value={this.state.inputValue} onChange={(event) => this.handleChange(event)} type="text" placeholder="Tag Name" />
-          <button onClick={ () => this.props.handleSearch(this.state.inputValue) } className={`${ styles.btn } ${ styles.btn_big }`} type="button">Search</button>
+          <button
+            onClick={ () => this.props.handleSearch(this.state.inputValue) }
+            className={`${ styles.btn } ${ styles.btn_big }`}
+            type="button"
+          >
+            Search
+          </button>
         </div>
         <select>
           <option>Votes</option>
