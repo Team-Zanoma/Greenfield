@@ -156,7 +156,14 @@ class App extends Component {
       <div className={ styles.App }>
         <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
         { this.state.showLogin ?  <Login handleLogin={ this.handleLogin } /> : null }
-        { this.state.showAddSource ? <AddSource handleAddSource={ this.handleAddSource } /> : null }
+        { this.state.showAddSource
+          ? (<AddSource
+              handleAddSource={ this.handleAddSource }
+              showAddSource={ this.showAddSource }
+              user={ this.state.username.username }
+            />)
+          : (null)
+        }
         <Search handleSearchByTag={ this.handleSearchByTag } handleSearchByTitle={ this.handleSearchByTitle }/>
         <Feed handleUpVote={ this.handleUpVote } linkList={ this.state.linkList } />
       </div>

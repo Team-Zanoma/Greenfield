@@ -57,8 +57,13 @@ class AddSource extends Component {
             </label>
             <label htmlFor="type">
               <span className={ styles.label } id="type">Link Type</span>
+<<<<<<< HEAD
               <select onChange={ (event) => this.handleTypeChange(event) }>
                 <option disabled selected>Resource Type</option>
+=======
+              <select onChange={(event) => this.handleTypeChange(event)}>
+                <option disabled selected>Choose Resource Type</option>
+>>>>>>> getting the add links to work
                 <option value='Video'>Video</option>
                 <option value='Article'>Article</option>
               </select>
@@ -74,7 +79,11 @@ class AddSource extends Component {
           </div>
           <div className={ styles.btnBar }>
             <button
+<<<<<<< HEAD
               onClick={ () => this.props.handleAddSource(this.state.tagNames, this.state.url, this.state.type, this.state.username) }
+=======
+              onClick={ () => this.props.handleAddSource(this.state.tagNames, this.state.url, this.state.type) }
+>>>>>>> getting the add links to work
               className={ styles.btn }
               type="submit"
             >
