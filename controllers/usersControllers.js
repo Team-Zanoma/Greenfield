@@ -10,8 +10,3 @@ exports.addUser = async (req, res) => {
 	const result = await knex('users').insert({ username: username, email: email });
 	res.send(result);
 };
-
-
-
-
-
