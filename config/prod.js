@@ -1,4 +1,7 @@
 module.exports = {
-	apiKey1: process.env.API_KEY_1,
-	apiKey2: process.env.API_KEY_2
+	mysqlEndpoint: process.env.RDS_ENDPOINT,
+	rdsUser: process.env.RDS_USER,
+	rdsPort: process.env.RDS_PORT,
+	rdsPassword: process.env.RDS_PASSWORD,
+	rdsName: process.env.RDS_NAME
 };
