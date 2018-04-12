@@ -11,121 +11,141 @@ import axios from 'axios';
 /* ----------- Level 1 ----------- */
 
 class App extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       showLogin: false,
       showAddSource: false,
       linkList: [],
-      username: ''
+      username: []
     }
 
+    this.getAllinks = this.getAllinks.bind(this);
+    this.getUsername = this.getUsername.bind(this);
     this.showLogin = this.showLogin.bind(this);
+
     this.handleLogin = this.handleLogin.bind(this);
     this.showAddSource = this.showAddSource.bind(this);
-    this.getUsername = this.getUsername.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleAddSource = this.handleAddSource.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
   }
 
-// render initial sources to Feed
-  componentDidMount() {
-    this.setState({
-      linkList: sampleList
-    });
+  getAllinks() {
+    axios.get('/api/links')
+      .then((response) => {
+        console.log(response.data)
+        this.setState({
+          linkList: response.data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      }
+    );
   }
 
+  getUsername() {
+    axios.get('/api/users')
+      .then((response) => {
+        this.setState({
+          username: response.data[0]
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  handleSearch(tag) {
+    let tagsArray = tag.trim().split(',');
+
+    axios.get('/api/searchByTag', {
+      params: { tag: tagsArray }
+    })
+      .then((results) => {
+        console.log(results.data);
+        this.setState({
+          linkList: results.data
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  // handles the hiding/showing of the login popup
   showLogin() {
     this.setState({
       showLogin: !this.state.showLogin
     });
   }
 
+  // handles the hiding/showing of the add link popup
   showAddSource() {
     this.setState({
       showAddSource: !this.state.showAddSource
     });
   }
 
+  componentDidMount() {
+    this.getAllinks();
+    this.getUsername();
+  }
+
+
   handleLogin(username, email) {
-    console.log('username in handleLogin() is: ', username, email)
-    axios.post('/api/users', {username, email})
-    .then((results) => {
-      this.getUsername(username);
-      console.log('success in handleLogin() axios post request');
-    })
-    .catch((error) => {
-      console.log('error in handleLogin(), error is: ', error);
-    })
+    axios.post('/api/users', { username, email })
+      .then((results) => {
+        this.getUsername(username);
+        console.log('success in handleLogin() axios post request');
+      })
+      .catch((error) => {
+        console.log('error in handleLogin(), error is: ', error);
+      }
+    );
   }
  
-  getUsername(username) {
-    axios.get('/api/users', {params: {username}})
-    .then((data) => {
-      this.setState({
-        username: data.username
+
+  handleAddSource(tagNames, url, type) {
+    let tagsArray = tagNames.trim().split(',');
+    axios.post('/api/links', { tagsArray, url, type, username: 'pedrobarquinha' })
+      .then((data) => {
+        console.log(data);
       })
-    })
+      .catch((error) => {
+        console.log(error);
+      }
+    );
   }
 
-  handleAddSource(tagNames, url, type){
-  var tagsArray = tagNames.split(',');
-
-  axios.post('/api/links', {tagsArray, url, type})
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-  }
-
-  //function to retrieve tags from server on search
-  handleSearch(tag) {
-    axios.get('/api/searchByTag',{params: {tag}})
-    .then((data) => {
-    console.log(data);
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
 
   handleUpVote(url) {
-    axios.post('/api/upvote', {url})
-    .then((response) => {
-      console.log('success');
-    })
-    .catch((error) => {
-      console.log('error');
-    })
+    axios.post('/api/upvote', { url })
+      .then((response) => {
+        console.log('success');
+      })
+      .catch((error) => {
+        console.log('error');
+      }
+    );
   }
 
 
   render() {
     return (
       <div className={ styles.App }>
-        <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource } />
-        { this.state.showLogin ?  <Login handleLogin={this.handleLogin} /> : null }
-        { this.state.showAddSource ? <AddSource showAddSource={ this.showAddSource } handleAddSource={ this.handleAddSource } /> : null }
-        <Search handleSearch={this.handleSearch} />
-        <Feed handleUpVote={this.handleUpVote} linkList={ this.state.linkList } />
+        <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
+        { this.state.showLogin ?  <Login handleLogin={ this.handleLogin } /> : null }
+        { this.state.showAddSource ? <AddSource handleAddSource={ this.handleAddSource } /> : null }
+        <Search handleSearch={ this.handleSearch } />
+        <Feed handleUpVote={ this.handleUpVote } linkList={ this.state.linkList } />
       </div>
     );
   }
 }
 
-let sampleList = [
- {title: 'Intro to Javascript', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png',  url: 'www.google.com', likes: 1234, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'},
- {title: 'Cracking the Coding Challenges', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: 'www.weather.com', likes: 1004, shares: 85, description: 'Coding challenges got you in a jam?  Try out these simple problems that will have you cracking these challenges in no time'},
- {title: 'Reactions to React', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: '', likes: 434, shares: 12, description: 'Now one of the most popular front-end frameworks in startups and large companies alike, React has many quirks and easter eggs that many developers have not used yet'},
- {title: 'Intro to Javascript', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: '', likes: 134, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'},
- {title: 'Intro to Javascript', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: '', likes: 1234, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'},
- {title: 'Cracking the Coding Challenges', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: '', likes: 1004, shares: 85, description: 'Coding challenges got you in a jam?  Try out these simple problems that will have you cracking these challenges in no time'},
- {title: 'Reactions to React', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: '', likes: 434, shares: 12, description: 'Now one of the most popular front-end frameworks in startups and large companies alike, React has many quirks and easter eggs that many developers have not used yet'},
- {title: 'Intro to Javascript', img: 'https://its.unl.edu/images/services/icons/Canvas%20Icon-F-01-01.png', url: '', likes: 134, shares: 55, description: 'Javascript expert John Doe walks you through how to make a simple javascript application from start to finish. Learn concepts such as functions, for loops, while loops, implicit type coercion, objects, and more'}
-]
 
 export default App;
