@@ -1,8 +1,6 @@
 const mysql = require('mysql');
-const knex = require('knex');
 const keys = require('../config/keys.js');
-
-exports.knex = knex({
+const knex = require('knex')({
   client: 'mysql',
   connection: {
     host : keys.mysqlEndpoint,
@@ -12,3 +10,5 @@ exports.knex = knex({
     database : keys.rdsName
   }
 });
+
+module.exports = { knex };
