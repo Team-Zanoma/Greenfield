@@ -7,7 +7,6 @@ import Login from './Login.js';
 import AddSource from './AddSource.js';
 import axios from 'axios';
 
-
 /* ----------- Level 1 ----------- */
 
 class App extends Component {
@@ -18,11 +17,12 @@ class App extends Component {
       showAddSource: false,
       linkList: [],
       username: [],
+      currentUser: 'pedro',
       searchTitle: 'Most Popular'
     }
 
     this.getAllinks = this.getAllinks.bind(this);
-    this.getUsername = this.getUsername.bind(this);
+    // this.getUsername = this.getUsername.bind(this);
     this.showLogin = this.showLogin.bind(this);
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -40,22 +40,8 @@ class App extends Component {
   getAllinks() {
     axios.get('/api/links')
       .then((response) => {
-        console.log(response.data)
         this.setState({
           linkList: response.data
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  getUsername() {
-    axios.get('/api/users')
-      .then((response) => {
-        this.setState({
-          username: response.data[0]
         });
       })
       .catch((error) => {
@@ -75,9 +61,17 @@ class App extends Component {
       params: { tag: tagsArray }
     })
       .then((results) => {
-        console.log(results.data);
+        var links = {};
+        var linksArr = [];
+        results.data.forEach((link) => {
+          if (!links[link.url]) {
+            links[link.url] = link;
+            linksArr.push(link);            
+          }
+        })
+
         this.setState({
-          linkList: results.data
+          linkList: linksArr
         });
       })
       .catch((error) => {
@@ -122,14 +116,17 @@ class App extends Component {
 
   componentDidMount() {
     this.getAllinks();
-    this.getUsername();
+    // this.getUsername();
   }
 
 
   handleLogin(username, email) {
     axios.post('/api/users', { username, email })
       .then((results) => {
-        this.getUsername(username);
+        // this.getUsername(username);
+        this.setState({
+          currentUser: username
+        })
         console.log('success in handleLogin() axios post request');
       })
       .catch((error) => {
@@ -139,9 +136,9 @@ class App extends Component {
   }
  
 
-  handleAddSource(tagNames, url, kind, username) {
+  handleAddSource(tagNames, url, kind) {
     let tagsArray = tagNames.replace(/, /g, ',').split(',');
-    axios.post('/api/links', { tagName: tagsArray, url, kind, username })
+    axios.post('/api/links', { tagName: tagsArray, url, kind, username: this.state.currentUser })
       .then((data) => {
         this.getAllinks();
         return this.showAddSource();
@@ -190,7 +187,6 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className={ styles.App }>
         <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
