@@ -3,7 +3,12 @@ const urlMetadata = require('url-metadata');
 const _ = require('lodash');
 
 exports.getAllLinks = async (req, res) => {
-	const allLinks = await knex.select().from('links').orderBy('votes', 'desc');
+	const by = req.query.by || 'votes'; 
+	if (by === 'kind') {
+		var { kind } = req.query;
+	} // not finished
+
+	const allLinks = await knex.select().from('links').orderBy(by, 'desc');
 	exports.addTagsToLinks(allLinks, (linksWithTags) => {
 		res.send(linksWithTags);
 	});
@@ -39,7 +44,6 @@ exports.addTagsToLinks = async (allLinks, cb) => {
 
 exports.addLink = async (req, res) => {
 	const { url, kind, votes, username, tagName } = req.body;
-	console.log(req.body.username);
 
 	try {
 		var metaData = await urlMetadata(url);
