@@ -18,6 +18,7 @@ class App extends Component {
       showAddSource: false,
       showDashboard: false,
       linkList: [],
+      favoritesList: [],
       username: [],
       currentUser: 'anonymous',
       isLoggedIn: false,
@@ -30,6 +31,7 @@ class App extends Component {
     this.handleLogin = this.handleLogin.bind(this);
     this.showAddSource = this.showAddSource.bind(this);
     this.showDashboard = this.showDashboard.bind(this);
+    this.hideDashboard = this.hideDashboard.bind(this);
 
     this.handleSearchByTag = this.handleSearchByTag.bind(this);
     this.handleSearchByTitle = this.handleSearchByTitle.bind(this);
@@ -123,6 +125,12 @@ class App extends Component {
     // this.getUsername();
   }
 
+  hideDashboard() {
+    this.setState({
+      showDashboard: !this.state.showDashboard
+    })
+  }
+
  
   showDashboard() {
     this.setState({
@@ -130,8 +138,25 @@ class App extends Component {
     })
 
     axios.get('/api/userLinks', {params: {username: this.state.currentUser}})
-    .then((data) => {
-      console.log(data);
+    .then((results) => {
+      console.log('RESULTS', results);
+
+      var links = {};
+      var linksArr = [];
+      results.data.forEach((link) => {
+        if (!links[link[0].url]) {
+          links[link[0].url] = link;
+          linksArr.push(link);            
+        }
+      })
+
+      console.log('FILTERED', linksArr);
+
+      this.setState({
+        favoritesList: linksArr
+      })
+
+
     })
     .catch((error) => {
       console.log(error);
@@ -245,7 +270,7 @@ class App extends Component {
           handleSearchByTag={ this.handleSearchByTag }
           handleSearchByTitle={ this.handleSearchByTitle }
         />
-        { this.state.showDashboard ? <Dashboard /> : null }
+        { this.state.showDashboard ? <Dashboard favoritesList={ this.state.favoritesList } hideDashboard={ this.hideDashboard } /> : null }
         { this.state.showLogin ?  <Login handleLogin={ this.handleLogin } /> : null }
         { this.state.showAddSource
           ? (<AddSource
