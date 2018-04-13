@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from '../assets/sass/AddSource.module.scss';
-import '../assets/sass/style.scss';
+import '../assets/sass/style.css';
 
 import { WithContext as ReactTags } from 'react-tag-input';
 import axios from 'axios';
