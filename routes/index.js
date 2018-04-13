@@ -8,6 +8,7 @@ const tagsControllers = require('../controllers/tagsControllers');
 router.post('/api/links', tagsControllers.getTags, linkControllers.addLink);
 router.post('/api/users', usersControllers.addUser);
 router.post('/api/upVote', linkControllers.upVote);
+router.post('/api/downVote', linkControllers.downVote);
 
 router.get('/api/links', linkControllers.getAllLinks);
 router.get('/api/users', usersControllers.getAllUsers);
