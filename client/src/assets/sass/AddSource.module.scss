@@ -17,6 +17,7 @@
 .dashboard_overlay {
 	background: rgba(#000, .9);
 	position: fixed;
+	overflow: scroll;
 	height: 100vh;
 	width: 100vw;
 	top: 0;
@@ -58,8 +59,30 @@
 	}
 }
 
+/* --- Favorites Close Btn ---- */
+.btn.close2 {
+    background-color: #cb0814;
+	color: #fff;
+	border-radius: 100%;
+	padding: 0 8px;
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	
+
+	&:hover {
+		background-color: lighten(#cb0814, 15%);
+		color: #fff;
+	}
+
+	.btn__icon {
+		margin: 0;
+	}
+	
+}
 
 
+/* ---- AddSource close button ---- */
 .btn.close {
 	background-color: #cb0814;
 	color: #fff;
