@@ -18,5 +18,6 @@ router.get('/api/searchByTag', linkControllers.searchByTag);
 router.get('/api/getAllTags', tagsControllers.getAllTags);
 router.get('/api/userLinks', usersControllers.getLinksByUser);
 router.post('/api/userLinks', usersControllers.addFavorite);
+router.post('/api/deleteFav', usersControllers.removeFavorite);
 
 module.exports = router;
