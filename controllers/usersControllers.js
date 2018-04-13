@@ -15,3 +15,13 @@ exports.addUser = async (req, res) => {
 
 	res.send();
 };
+
+exports.getLinksByUser = async (req, res) => {
+  const { username } = req.query;
+  
+  
+}
+
+exports.addFavorite = async (req, res) => {
+
+}

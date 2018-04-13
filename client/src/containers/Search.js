@@ -35,7 +35,7 @@ class Search extends Component {
           </div>
           <input value={ this.state.inputValue } 
             onChange={ (event) => this.handleChange(event) } 
-            type="text" placeholder={ this.state.searchBy } 
+            type="text" placeholder=""
           />
           <button
             onClick={ () => {
@@ -58,7 +58,7 @@ class Search extends Component {
             </span>
             <span>
               <input type="radio" id="sorting2" name="sorting" value="shares" />
-              <label htmlFor="contactChoice2"> Share </label>
+              <label htmlFor="contactChoice2"> Shares </label>
             </span>
             <span>
               <input type="radio" id="sorting2" name="sorting" value="addedAt" />
