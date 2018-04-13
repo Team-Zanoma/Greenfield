@@ -25,6 +25,10 @@ class App extends Component {
       searchTitle: 'Most Popular'
     }
 
+
+    this.tester = this.tester.bind(this);
+
+
     this.getAllinks = this.getAllinks.bind(this);
     this.showLogin = this.showLogin.bind(this);
 
@@ -122,9 +126,20 @@ class App extends Component {
     });
   }
 
+  tester() {
+    axios.get('/api/test')
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error);
+      }
+    );
+  }
+
   componentDidMount() {
+    this.tester();
     this.getAllinks();
-    // this.getUsername();
   }
 
   hideDashboard() {

@@ -20,4 +20,6 @@ router.get('/api/userLinks', usersControllers.getLinksByUser);
 router.post('/api/userLinks', usersControllers.addFavorite);
 router.post('/api/deleteFav', usersControllers.removeFavorite);
 
+router.get('/api/test', tagsControllers.test);
+
 module.exports = router;

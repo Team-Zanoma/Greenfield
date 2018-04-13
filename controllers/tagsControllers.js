@@ -16,3 +16,7 @@ exports.getTags = async (req, res, next) => {
 
 	next();
 }
+
+exports.test = (req, res) => {
+	res.send('testing');
+}
