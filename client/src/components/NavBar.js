@@ -4,7 +4,7 @@ import styles from '../assets/sass/NavBar.module.scss';
 
 /* ----------- Level 2 ------------- */
 
-const NavBar = ({ showLogin, showAddSource, username }) => {
+const NavBar = ({ showLogin, showAddSource, username, isLoggedIn, showDashboard }) => {
 	return (
 		<div className={ styles.navbar_container }>
 			<div className={styles.container }>
@@ -15,7 +15,7 @@ const NavBar = ({ showLogin, showAddSource, username }) => {
 					</button>
 					<button className={ styles.btn } onClick={() => showLogin()}>
 						<i className={ styles.btn__icon }>account_box</i>
-						<span className={ styles.btn__val }> { username !== 'anonymous' ? username : 'Login'}</span>
+						<span className={ styles.btn__val } onClick={() => isLoggedIn ?  showDashboard() : null}> { username !== 'anonymous' ? username : 'Login'}</span>
 					</button>
 				</div>
 				<div className={ styles.logo }>
