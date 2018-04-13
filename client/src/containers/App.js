@@ -36,6 +36,7 @@ class App extends Component {
 
     this.handleAddSource = this.handleAddSource.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
+    this.handleDownVote = this.handleDownVote.bind(this);
     this.handleFeedTitleChange = this.handleFeedTitleChange.bind(this);
     this.sortLinksBy = this.sortLinksBy.bind(this);
   }
@@ -172,7 +173,7 @@ class App extends Component {
 
 
   handleUpVote(url) {
-
+    console.log('upVoting')
     axios.post('/api/userLinks', {username: this.state.currentUser, url})
     .then((response) => {
       console.log(response);
@@ -181,7 +182,19 @@ class App extends Component {
       console.log(error);
     })
   
-    axios.post('/api/upvote', { url })
+    axios.post('/api/upVote', { url })
+      .then((response) => {
+        console.log('success');
+      })
+      .catch((error) => {
+        console.log('error');
+      }
+    );
+  }
+
+  handleDownVote(url) {
+    console.log('downVoting')
+    axios.post('/api/downVote', { url })
       .then((response) => {
         console.log('success');
       })
@@ -245,6 +258,7 @@ class App extends Component {
         <Feed
           title={ this.state.searchTitle }
           handleUpVote={ this.handleUpVote }
+          handleDownVote={ this.handleDownVote }
           linkList={ this.state.linkList }
         />
       </div>
