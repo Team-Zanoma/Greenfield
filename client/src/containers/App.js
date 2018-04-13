@@ -183,9 +183,15 @@ class App extends Component {
   }
  
 
-  handleAddSource(tagNames, url, kind) {
-    let tagsArray = tagNames.replace(/, /g, ',').split(',');
-    axios.post('/api/links', { tagName: tagsArray, url, kind, username: this.state.currentUser })
+  handleAddSource(tags, url, kind) {
+    //convert from react-tags-input format into a simple array format
+    let tagArr = tags.map((tag) => tag.id);
+
+    let infoObj = { tagName: tagArr, url, kind, username: this.state.currentUser }
+
+    console.log('the object that we are sending is: ', infoObj);
+
+    axios.post('/api/links', infoObj )
       .then((data) => {
         this.getAllinks();
         return this.showAddSource();
