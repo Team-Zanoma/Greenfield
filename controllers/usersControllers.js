@@ -37,8 +37,9 @@ exports.addFavorite = async (req, res) => {
 }
 
 exports.removeFavorite = async (req, res) => {
-  const { id_links, username } = req.body;
+  const { linkId, username } = req.body;
+
   const userId = await knex('users').select('id_users').where({ username: username});
-  const insertFavorite = await knex('UsersLinks').where({ links_id: id_links, users_id: userId[0].id_users }).del();
+  const insertFavorite = await knex('UsersLinks').where({ links_id: linkId, users_id: userId[0].id_users }).del();
   res.send()
 }

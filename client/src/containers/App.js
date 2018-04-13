@@ -128,6 +128,8 @@ class App extends Component {
   }
 
   hideDashboard() {
+    this.getUserFavorites();
+
     this.setState({
       showDashboard: !this.state.showDashboard
     })
@@ -149,12 +151,7 @@ class App extends Component {
     })
   }
 
-
-  showDashboard() {
-    this.setState({
-      showDashboard: !this.state.showDashboard
-    })
-
+  getUserFavorites() {
     axios.get('/api/userLinks', {params: {username: this.state.currentUser}})
     .then((results) => {
       this.filterLinks(results);
@@ -164,10 +161,17 @@ class App extends Component {
     })
   }
 
+  showDashboard() {
+    this.setState({
+      showDashboard: !this.state.showDashboard
+    })
+    this.getUserFavorites();
+  }
+
   deleteFavorites(linkId) {
     axios.post('/api/deleteFav', { linkId, username: this.state.currentUser })
     .then((results) => {
-      this.filterLinks(results);
+      this.getUserFavorites()
     })
     .catch((error) => {
       console.log(error);

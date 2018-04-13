@@ -5,7 +5,7 @@ import styles3 from '../assets/sass/Files.module.scss';
 
 /* -------- Level 2 --------- */
 
-const Dashboard = function({hideDashboard, favoritesList, deleteFavorites}) {
+const Dashboard = function({ hideDashboard, favoritesList, deleteFavorites }) {
 	return(
       <div className={ styles.dashboard_overlay }>
         <button className={`${ styles.btn } ${ styles.close2 }`}>
@@ -26,7 +26,7 @@ const Dashboard = function({hideDashboard, favoritesList, deleteFavorites}) {
   	              <div className={ styles3.metrics }>
                    <ul>
                      <li>
-                       <span className="title"><i className={ styles3.share__icon } onClick={ () => deleteFavorites(file.id_links) }>star_border</i>Liked</span>
+                       <span className="title"><i className={ styles3.share__icon } onClick={ () => deleteFavorites(file[0].id_links) }>star_border</i>Liked</span>
                        <span className="count">{ file[0].likes }</span>
                      </li>
                      <li>
