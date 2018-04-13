@@ -32,6 +32,8 @@ class App extends Component {
     this.showAddSource = this.showAddSource.bind(this);
     this.showDashboard = this.showDashboard.bind(this);
     this.hideDashboard = this.hideDashboard.bind(this);
+    this.deleteFavorites = this.deleteFavorites.bind(this);
+    this.filterLinks = this.filterLinks.bind(this);
 
     this.handleSearchByTag = this.handleSearchByTag.bind(this);
     this.handleSearchByTitle = this.handleSearchByTitle.bind(this);
@@ -131,7 +133,23 @@ class App extends Component {
     })
   }
 
- 
+  //Filter links so sources do not repeat
+  filterLinks(results) {
+    var links = {};
+    var linksArr = [];
+    results.data.forEach((link) => {
+      if (!links[link[0].url]) {
+        links[link[0].url] = link;
+        linksArr.push(link);            
+      }
+    })
+
+    this.setState({
+      favoritesList: linksArr
+    })
+  }
+
+
   showDashboard() {
     this.setState({
       showDashboard: !this.state.showDashboard
@@ -139,24 +157,17 @@ class App extends Component {
 
     axios.get('/api/userLinks', {params: {username: this.state.currentUser}})
     .then((results) => {
-      console.log('RESULTS', results);
+      this.filterLinks(results);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
 
-      var links = {};
-      var linksArr = [];
-      results.data.forEach((link) => {
-        if (!links[link[0].url]) {
-          links[link[0].url] = link;
-          linksArr.push(link);            
-        }
-      })
-
-      console.log('FILTERED', linksArr);
-
-      this.setState({
-        favoritesList: linksArr
-      })
-
-
+  deleteFavorites(linkId) {
+    axios.post('/api/deleteFav', { linkId, username: this.state.currentUser })
+    .then((results) => {
+      this.filterLinks(results);
     })
     .catch((error) => {
       console.log(error);
@@ -173,8 +184,6 @@ class App extends Component {
           showLogin: !this.state.showLogin,
           isLoggedIn: !this.state.isLoggedIn,
         })
-
-        console.log('success in handleLogin() axios post request');
       })
       .catch((error) => {
         console.log('error in handleLogin(), error is: ', error);
@@ -186,10 +195,7 @@ class App extends Component {
   handleAddSource(tags, url, kind) {
     //convert from react-tags-input format into a simple array format
     let tagArr = tags.map((tag) => tag.id);
-
     let infoObj = { tagName: tagArr, url, kind, username: this.state.currentUser }
-
-    console.log('the object that we are sending is: ', infoObj);
 
     axios.post('/api/links', infoObj )
       .then((data) => {
@@ -224,7 +230,6 @@ class App extends Component {
   }
 
   handleDownVote(url) {
-    console.log('downVoting')
     axios.post('/api/downVote', { url })
       .then((response) => {
         console.log('success');
@@ -278,6 +283,7 @@ class App extends Component {
         />
         { this.state.showDashboard
           ? (<Dashboard
+              deleteFavorites={ this.deleteFavorites }
               favoritesList={ this.state.favoritesList }
               hideDashboard={ this.hideDashboard }
             />)
