@@ -1,7 +1,7 @@
 @import 'button';
 
 *, *:before, *:after {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .search_container {
@@ -32,7 +32,7 @@
 		background-color: #cb0814;
 		 &:hover {
 		 	background-color: darken(#cb0814, 5%);
-		 }
+		}
 	}
 
 	input[type=text] {
@@ -59,88 +59,88 @@
 		display: inline-block;
 		background: #fff;
 		vertical-align: bottom;
-	  
-	  &:after {
-	    content: '';
-	    position: absolute;
-	    top: 0;
-	    width: 0;
-	    height: 0;
-	    left: 10px;
-	    bottom: 0;
-	    margin: auto;
-	    border-style: solid;
-	    border-width: 5px 5px 0 5px;
-	    border-color: #fff transparent transparent transparent;
-	    pointer-events: none;
-	  }
-	  
-	  &:before {
-	    width: 30px;
-	    position: absolute;
-	    top: 1px;
-	    left: 1px;
-	    bottom: 1px;
-	    background: #cb0814;
-	    content: '';
-	    pointer-events: none;
-	  }
-	  
-	  &:hover {
-	    &:before {
-	      background: darken(#cb0814, 5%);
-	    }
-	  }
-	  
-	  select {
-	    font-size: 18px;
-	    border: none;
-	    box-shadow: none;
-	    border-radius: 0;
-	    background: transparent;
-	    height: 100%;
-	    width: 100%;
-	    cursor: pointer;
-	    outline: none;
-	    padding-right: 10px;
-	    padding-left: 45px;
-	    border: 1px solid #cb0814;
-	    border-radius: 3px 0 0 3px;
-	    line-height: 42px;
+		
+		&:after {
+			content: '';
+			position: absolute;
+			top: 0;
+			width: 0;
+			height: 0;
+			left: 10px;
+			bottom: 0;
+			margin: auto;
+			border-style: solid;
+			border-width: 5px 5px 0 5px;
+			border-color: #fff transparent transparent transparent;
+			pointer-events: none;
+		}
+		
+		&:before {
+			width: 30px;
+			position: absolute;
+			top: 1px;
+			left: 1px;
+			bottom: 1px;
+			background: #cb0814;
+			content: '';
+			pointer-events: none;
+		}
+		
+		&:hover {
+			&:before {
+				background: darken(#cb0814, 5%);
+			}
+		}
+		
+		select {
+			font-size: 18px;
+			border: none;
+			box-shadow: none;
+			border-radius: 0;
+			background: transparent;
+			height: 100%;
+			width: 100%;
+			cursor: pointer;
+			outline: none;
+			padding-right: 10px;
+			padding-left: 45px;
+			border: 1px solid #cb0814;
+			border-radius: 3px 0 0 3px;
+			line-height: 42px;
 
-	    // Disable default styling on ff
-	    -moz-appearance: none;
-	    
-	    // Disable ugly ass outline on firefox 
-	    &:-moz-focusring {
-	      color: transparent;
-	      text-shadow: 0 0 0 #000;
-	    } 
-	    
-	    // Disable default styling on webkit browsers 
-	    -webkit-appearance: none;
-	    
-	    // Disable default arrow on IE 11+
-	    &::-ms-expand {
-	      display: none;
-	    }
-	    
-	    &:focus {  
-	      border-color: #cb0814;    
-	    }
-	  }
+			// Disable default styling on ff
+			-moz-appearance: none;
+			
+			// Disable ugly ass outline on firefox 
+			&:-moz-focusring {
+				color: transparent;
+				text-shadow: 0 0 0 #000;
+			} 
+			
+			// Disable default styling on webkit browsers 
+			-webkit-appearance: none;
+			
+			// Disable default arrow on IE 11+
+			&::-ms-expand {
+				display: none;
+			}
+			
+			&:focus {	
+				border-color: #cb0814;		
+			}
+		}
 	}
 
 	// IE 9 only 
 	@media all and (min-width:0\0) and (min-resolution:.001dpcm){
-	  .select{ 
-	    select {
-	      padding-right: 0;
-	    }
+		.select{ 
+			select {
+				padding-right: 0;
+			}
 
-	    &:after, &:before {
-	      display: none;
-	    }
-	  }
+			&:after, &:before {
+				display: none;
+			}
+		}
 	}
 }
