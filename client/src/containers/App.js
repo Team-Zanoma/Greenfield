@@ -17,12 +17,11 @@ class App extends Component {
       showAddSource: false,
       linkList: [],
       username: [],
-      currentUser: 'pedro',
+      currentUser: 'anonymous',
       searchTitle: 'Most Popular'
     }
 
     this.getAllinks = this.getAllinks.bind(this);
-    // this.getUsername = this.getUsername.bind(this);
     this.showLogin = this.showLogin.bind(this);
 
     this.handleLogin = this.handleLogin.bind(this);
@@ -125,7 +124,8 @@ class App extends Component {
       .then((results) => {
         // this.getUsername(username);
         this.setState({
-          currentUser: username
+          currentUser: username,
+          showLogin: !this.state.showLogin
         })
         console.log('success in handleLogin() axios post request');
       })
@@ -189,7 +189,7 @@ class App extends Component {
   render() {
     return (
       <div className={ styles.App }>
-        <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
+        <NavBar username={ this.state.currentUser } showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
         { this.state.showLogin ?  <Login handleLogin={ this.handleLogin } /> : null }
         { this.state.showAddSource
           ? (<AddSource
