@@ -6,9 +6,6 @@
 /* Styles for the input */
 .ReactTags__tagInput {
 	display: block;
-	position: absolute;
-	top: 0;
-	width: 100%;
 
 	.ReactTags__tagInputField, .ReactTags__tagInputField:focus {
 		margin: 0;
@@ -22,9 +19,6 @@
 
 /* Styles for selected tags */
 .ReactTags__selected {
-	position: relative;
-	padding-top: 32px;
-
 	.ReactTags__tag {
 		background: #ccc;
 		display: inline-block;
@@ -49,7 +43,6 @@
 		list-style-type: none;
 		width: auto;
 		padding:0;
-		margin: 38px 0 0 0;
 
 		&:before {
 			content: 'Suggestions:';
