@@ -20,7 +20,7 @@ const Dashboard = function({hideDashboard, favoritesList}) {
                <img src={ file[0].image } alt="" />
   	            <div className={ styles3.details }>
   	              <h3>
-                   <a href={ file[0].url }>{ file[0].title }</a>
+                   <a href={ file[0].url } target='_blank'>{ file[0].title }</a>
                  </h3>
   	              <div>{ file[0].description }</div>
   	              <div className={ styles3.metrics }>
