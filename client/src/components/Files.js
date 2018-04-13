@@ -25,7 +25,7 @@ class Files extends React.Component {
         <img src={ file.image } alt="" />
         <div className={ styles.details }>
           <h3>
-            <a href={ file.url }>{ file.title }</a>
+            <a href={ file.url } target='_blank'>{ file.title }</a>
           </h3>
           <div>{ file.description }</div>
           <div className={ styles.metrics }>
