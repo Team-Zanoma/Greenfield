@@ -10,7 +10,7 @@ class Search extends Component {
     super(props);
 	  this.state = {
       inputValue: '',
-      searchBy: `Tags` 
+      searchBy: `Tags`
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -53,7 +53,7 @@ class Search extends Component {
           <form onChange={ (event) => this.props.sort(event.target.value) }>
             <h4>Sort by:</h4>
             <span>
-              <input type="radio" id="sorting1" name="sorting" value="votes" />
+              <input type="radio" id="sorting1" name="sorting" value="votes" defaultChecked={ true } />
               <label htmlFor="contactChoice1"> Votes </label>
             </span>
             <span>
