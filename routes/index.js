@@ -14,6 +14,7 @@ router.get('/api/users', usersControllers.getAllUsers);
 router.get('/api/linksByDate', linkControllers.getLinksByDate);
 router.get('/api/searchByTitle', linkControllers.searchByTitle);
 router.get('/api/searchByTag', linkControllers.searchByTag);
+router.get('/api/getAllTags', tagsControllers.getAllTags);
 router.get('/api/userLinks', usersControllers.getLinksByUser);
 router.post('/api/userLinks', usersControllers.addFavorite);
 
