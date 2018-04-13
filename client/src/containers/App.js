@@ -276,8 +276,20 @@ class App extends Component {
           handleSearchByTag={ this.handleSearchByTag }
           handleSearchByTitle={ this.handleSearchByTitle }
         />
-        { this.state.showDashboard ? <Dashboard favoritesList={ this.state.favoritesList } hideDashboard={ this.hideDashboard } /> : null }
-        { this.state.showLogin ?  <Login handleLogin={ this.handleLogin } /> : null }
+        { this.state.showDashboard
+          ? (<Dashboard
+              favoritesList={ this.state.favoritesList }
+              hideDashboard={ this.hideDashboard }
+            />)
+          : (null)
+        }
+        { this.state.showLogin
+          ? (<Login
+              handleLogin={ this.handleLogin }
+              showLogin={ this.showLogin }
+            />)
+          : (null)
+        }
         { this.state.showAddSource
           ? (<AddSource
               handleAddSource={ this.handleAddSource }
