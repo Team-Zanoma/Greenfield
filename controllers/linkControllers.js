@@ -3,7 +3,6 @@ const urlMetadata = require('url-metadata');
 const _ = require('lodash');
 
 exports.getAllLinks = async (req, res) => {
-	res.send('test')
 	const by = req.query.by || 'votes'; 
 	if (by === 'kind') {
 		var { kind } = req.query;
