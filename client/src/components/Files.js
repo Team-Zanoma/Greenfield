@@ -3,10 +3,6 @@ import styles from '../assets/sass/Files.module.scss';
 
 /* ------------ Level 3 ------------ */
 
-
-
-
-
 class Files extends React.Component {
   constructor(props) {
     super(props);
