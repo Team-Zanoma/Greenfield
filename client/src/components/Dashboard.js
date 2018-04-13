@@ -8,7 +8,7 @@ import styles3 from '../assets/sass/Files.module.scss';
 const Dashboard = function({ hideDashboard, favoritesList, deleteFavorites }) {
 	return(
       <div className={ styles.dashboard_overlay }>
-        <div className={ styles.addSource_container }>
+        <div className={` ${styles.addSource_container} ${styles.tweaks} `}>
           <button className={`${ styles.btn } ${ styles.close2 }`}>
             <i className={ styles.btn__icon } onClick={() => hideDashboard() }>close</i>
           </button>
