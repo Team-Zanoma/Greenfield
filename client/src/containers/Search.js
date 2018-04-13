@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from '../assets/sass/Search.module.scss';
+
 // import Filter from './Filter.js';
 
 /* ---------- Level 2 ----------- */
