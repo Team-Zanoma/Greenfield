@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from '../assets/sass/AddSource.module.scss';
 
 /* ----------- Level 3 ----------- */
 
@@ -28,14 +29,19 @@ class Login extends Component {
 
   render() {
   	return (
-  	  <div className="login_container">
-        <form onSubmit={(event) => {event.preventDefault(); this.props.handleLogin(this.state.username, this.state.email)}}>
-          <input value={this.state.value} onChange={(event) => {this.handleUserChange(event)}} type="text" placeholder="Username" required />
-          <input type="password" placeholder="Password" required />
-          <input value={this.state.email} onChange={(event) => {this.handleEmailChange(event)}} type="email" placeholder="email" required />
-          <input type="submit" value="Login" />
-        </form>
-  	  </div>
+      <div className={ styles.addSource_overlay }>
+        <div className={ styles.addSource_container }>
+          <button className={`${ styles.btn } ${ styles.close }`} onClick={ this.props.showLogin }>
+            <i className={ styles.btn__icon }>close</i>
+          </button>
+          <form onSubmit={(event) => {event.preventDefault(); this.props.handleLogin(this.state.username, this.state.email)}}>
+            <input value={this.state.value} onChange={(event) => {this.handleUserChange(event)}} type="text" placeholder="Username" required />
+            <input type="password" placeholder="Password" required />
+            <input value={this.state.email} onChange={(event) => {this.handleEmailChange(event)}} type="email" placeholder="email" required />
+            <input type="submit" value="Login" />
+          </form>
+        </div>
+      </div>
   	)
   }
 }
