@@ -65,6 +65,13 @@
 			padding: 5px;
 			font-size: 16px;
 			width: 100%;
+
+		}
+
+		&:last-of-type {
+			input {
+				margin-bottom: 0;
+			}
 		}
 	}
 
