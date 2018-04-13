@@ -202,7 +202,19 @@ class App extends Component {
   render() {
     return (
       <div className={ styles.App }>
-        <NavBar showDashboard={ this.showDashboard } isLoggedIn={ this.state.isLoggedIn } username={ this.state.currentUser } showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
+        <NavBar
+          showDashboard={ this.showDashboard }
+          isLoggedIn={ this.state.isLoggedIn }
+          username={ this.state.currentUser }
+          showLogin={ this.showLogin }
+          showAddSource={ this.showAddSource }
+        />
+        <Search
+          sort={ this.sortLinksBy }
+          handleFeedTitleChange={ this.handleFeedTitleChange }
+          handleSearchByTag={ this.handleSearchByTag }
+          handleSearchByTitle={ this.handleSearchByTitle }
+        />
         { this.state.showDashboard ? <Dashboard /> : null }
         { this.state.showLogin ?  <Login handleLogin={ this.handleLogin } /> : null }
         { this.state.showAddSource
@@ -213,8 +225,11 @@ class App extends Component {
             />)
           : (null)
         }
-        <Search sort={ this.sortLinksBy } handleFeedTitleChange={ this.handleFeedTitleChange } handleSearchByTag={ this.handleSearchByTag } handleSearchByTitle={ this.handleSearchByTitle }/>
-        <Feed title={ this.state.searchTitle } handleUpVote={ this.handleUpVote } linkList={ this.state.linkList } />
+        <Feed
+          title={ this.state.searchTitle }
+          handleUpVote={ this.handleUpVote }
+          linkList={ this.state.linkList }
+        />
       </div>
     );
   }
