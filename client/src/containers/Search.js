@@ -25,6 +25,13 @@ class Search extends Component {
     return (
       <div className={ styles.search_container }>
         <div className={ styles.searchInput_container }>
+          <div className={ styles.select }>
+            <select onChange={ (event) => this.setState({ searchBy: event.target.value }) } defaultValue={''}>
+              <option value='' disabled>Search By...</option>
+              <option>Tags</option>
+              <option>Title</option>
+            </select> 
+          </div>
           <input value={ this.state.inputValue } 
             onChange={ (event) => this.handleChange(event) } 
             type="text" placeholder={ this.state.searchBy } 
@@ -41,26 +48,22 @@ class Search extends Component {
             Search
           </button>
         </div>
-        <select onChange={ (event) => this.setState({ searchBy: event.target.value }) }>
-          <option>Tags</option>
-          <option>Title</option>
-        </select> 
-        <div style={{float:'right', position:"relative", right:"20px"}}>
-        <form onChange={ (event) => this.props.sort(event.target.value) }>
-          <h5> sort by: </h5>
-          <div style={{display:"block"}}>
-            <input type="radio" id="sorting1"
-             name="sorting" value="votes" />
-            <label for="contactChoice1"> Votes </label>
-          </div>
-          <input type="radio" id="sorting2"
-           name="sorting" value="shares" />
-          <label for="contactChoice2"> Share </label>
-          
-          <input type="radio" id="sorting2"
-           name="sorting" value="addedAt" />
-          <label for="contactChoice2"> Date </label>
-        </form>
+        <div className={ styles.sortRadios }>
+          <form onChange={ (event) => this.props.sort(event.target.value) }>
+            <h4>Sort by:</h4>
+            <span>
+              <input type="radio" id="sorting1" name="sorting" value="votes" />
+              <label htmlFor="contactChoice1"> Votes </label>
+            </span>
+            <span>
+              <input type="radio" id="sorting2" name="sorting" value="shares" />
+              <label htmlFor="contactChoice2"> Share </label>
+            </span>
+            <span>
+              <input type="radio" id="sorting2" name="sorting" value="addedAt" />
+            <label htmlFor="contactChoice2"> Date </label>
+            </span>
+          </form>
         </div>
       </div>
     );
