@@ -22,7 +22,7 @@ class Files extends React.Component {
     const { file, handleUpVote, handleDownVote } = this.props;
     return (
       <li className={ styles.file_container }>
-        <img src={ file.image } alt="" />
+        <img src = { file.url } src={ file.image } alt="" />
         <div className={ styles.details }>
           <h3>
             <a href={ file.url }>{ file.title }</a>
