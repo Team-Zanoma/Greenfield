@@ -5,6 +5,7 @@ import Search from './Search.js';
 import NavBar from '../components/NavBar.js';
 import Login from './Login.js';
 import AddSource from './AddSource.js';
+import Dashboard from '../components/Dashboard.js'
 import axios from 'axios';
 
 /* ----------- Level 1 ----------- */
@@ -15,9 +16,11 @@ class App extends Component {
     this.state = {
       showLogin: false,
       showAddSource: false,
+      showDashboard: false,
       linkList: [],
       username: [],
       currentUser: 'anonymous',
+      isLoggedIn: false,
       searchTitle: 'Most Popular'
     }
 
@@ -26,6 +29,7 @@ class App extends Component {
 
     this.handleLogin = this.handleLogin.bind(this);
     this.showAddSource = this.showAddSource.bind(this);
+    this.showDashboard = this.showDashboard.bind(this);
 
     this.handleSearchByTag = this.handleSearchByTag.bind(this);
     this.handleSearchByTitle = this.handleSearchByTitle.bind(this);
@@ -118,6 +122,13 @@ class App extends Component {
     // this.getUsername();
   }
 
+ 
+  showDashboard(){
+    this.setState({
+      showDashboard: !this.state.showDashboard
+    })
+  }
+
 
   handleLogin(username, email) {
     axios.post('/api/users', { username, email })
@@ -125,8 +136,10 @@ class App extends Component {
         // this.getUsername(username);
         this.setState({
           currentUser: username,
-          showLogin: !this.state.showLogin
+          showLogin: !this.state.showLogin,
+          isLoggedIn: !this.state.isLoggedIn,
         })
+
         console.log('success in handleLogin() axios post request');
       })
       .catch((error) => {
@@ -189,7 +202,8 @@ class App extends Component {
   render() {
     return (
       <div className={ styles.App }>
-        <NavBar username={ this.state.currentUser } showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
+        <NavBar showDashboard={ this.showDashboard } isLoggedIn={ this.state.isLoggedIn } username={ this.state.currentUser } showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
+        { this.state.showDashboard ? <Dashboard /> : null }
         { this.state.showLogin ?  <Login handleLogin={ this.handleLogin } /> : null }
         { this.state.showAddSource
           ? (<AddSource
