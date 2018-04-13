@@ -112,6 +112,13 @@ exports.upVote = async (req, res) => {
 	res.status(201).send();
 }
 
+exports.downVote = async (req, res) => {
+	const { url } = req.body;
+	const votes = await knex('links').select('votes').where({ url });
+	const link = await knex('links').where({ url }).update({ votes: (votes[0].votes - 1) });
+	res.status(201).send();
+}
+
 exports.searchByTag = async (req, res) => {
 	var { tag } = req.query;
 	const links = [];
