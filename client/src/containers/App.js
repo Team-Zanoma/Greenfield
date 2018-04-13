@@ -5,8 +5,8 @@ import Search from './Search.js';
 import NavBar from '../components/NavBar.js';
 import Login from './Login.js';
 import AddSource from './AddSource.js';
+import Dashboard from '../components/Dashboard.js'
 import axios from 'axios';
-
 
 /* ----------- Level 1 ----------- */
 
@@ -16,45 +16,40 @@ class App extends Component {
     this.state = {
       showLogin: false,
       showAddSource: false,
+      showDashboard: false,
       linkList: [],
+      favoritesList: [],
       username: [],
+      currentUser: 'anonymous',
+      isLoggedIn: false,
       searchTitle: 'Most Popular'
     }
 
     this.getAllinks = this.getAllinks.bind(this);
-    this.getUsername = this.getUsername.bind(this);
     this.showLogin = this.showLogin.bind(this);
 
     this.handleLogin = this.handleLogin.bind(this);
     this.showAddSource = this.showAddSource.bind(this);
+    this.showDashboard = this.showDashboard.bind(this);
+    this.hideDashboard = this.hideDashboard.bind(this);
+    this.deleteFavorites = this.deleteFavorites.bind(this);
+    this.filterLinks = this.filterLinks.bind(this);
 
     this.handleSearchByTag = this.handleSearchByTag.bind(this);
     this.handleSearchByTitle = this.handleSearchByTitle.bind(this);
 
     this.handleAddSource = this.handleAddSource.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
-    this.handleFeedTitleChange = this.handleFeedTitleChange.bind(this)
+    this.handleDownVote = this.handleDownVote.bind(this);
+    this.handleFeedTitleChange = this.handleFeedTitleChange.bind(this);
+    this.sortLinksBy = this.sortLinksBy.bind(this);
   }
 
   getAllinks() {
     axios.get('/api/links')
       .then((response) => {
-        console.log(response.data)
         this.setState({
           linkList: response.data
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      }
-    );
-  }
-
-  getUsername() {
-    axios.get('/api/users')
-      .then((response) => {
-        this.setState({
-          username: response.data[0]
         });
       })
       .catch((error) => {
@@ -74,9 +69,17 @@ class App extends Component {
       params: { tag: tagsArray }
     })
       .then((results) => {
-        console.log(results.data);
+        var links = {};
+        var linksArr = [];
+        results.data.forEach((link) => {
+          if (!links[link.url]) {
+            links[link.url] = link;
+            linksArr.push(link);            
+          }
+        })
+
         this.setState({
-          linkList: results.data
+          linkList: linksArr
         });
       })
       .catch((error) => {
@@ -121,15 +124,70 @@ class App extends Component {
 
   componentDidMount() {
     this.getAllinks();
-    this.getUsername();
+    // this.getUsername();
+  }
+
+  hideDashboard() {
+    this.getUserFavorites();
+
+    this.setState({
+      showDashboard: !this.state.showDashboard
+    })
+  }
+
+  //Filter links so sources do not repeat
+  filterLinks(results) {
+    var links = {};
+    var linksArr = [];
+    results.data.forEach((link) => {
+      if (!links[link[0].url]) {
+        links[link[0].url] = link;
+        linksArr.push(link);            
+      }
+    })
+
+    this.setState({
+      favoritesList: linksArr
+    })
+  }
+
+  getUserFavorites() {
+    axios.get('/api/userLinks', {params: {username: this.state.currentUser}})
+    .then((results) => {
+      this.filterLinks(results);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  }
+
+  showDashboard() {
+    this.setState({
+      showDashboard: !this.state.showDashboard
+    })
+    this.getUserFavorites();
+  }
+
+  deleteFavorites(linkId) {
+    axios.post('/api/deleteFav', { linkId, username: this.state.currentUser })
+    .then((results) => {
+      this.getUserFavorites();
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
 
   handleLogin(username, email) {
     axios.post('/api/users', { username, email })
       .then((results) => {
-        this.getUsername(username);
-        console.log('success in handleLogin() axios post request');
+        // this.getUsername(username);
+        this.setState({
+          currentUser: username,
+          showLogin: !this.state.showLogin,
+          isLoggedIn: !this.state.isLoggedIn,
+        })
       })
       .catch((error) => {
         console.log('error in handleLogin(), error is: ', error);
@@ -138,9 +196,12 @@ class App extends Component {
   }
  
 
-  handleAddSource(tagNames, url, kind, username) {
-    let tagsArray = tagNames.replace(/, /g, ',').split(',');
-    axios.post('/api/links', { tagName: tagsArray, url, kind, username })
+  handleAddSource(tags, url, kind) {
+    //convert from react-tags-input format into a simple array format
+    let tagArr = tags.map((tag) => tag.id);
+    let infoObj = { tagName: tagArr, url, kind, username: this.state.currentUser }
+
+    axios.post('/api/links', infoObj )
       .then((data) => {
         this.getAllinks();
         return this.showAddSource();
@@ -153,7 +214,27 @@ class App extends Component {
 
 
   handleUpVote(url) {
-    axios.post('/api/upvote', { url })
+    console.log('upVoting')
+    axios.post('/api/userLinks', {username: this.state.currentUser, url})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  
+    axios.post('/api/upVote', { url })
+      .then((response) => {
+        console.log('success');
+      })
+      .catch((error) => {
+        console.log('error');
+      }
+    );
+  }
+
+  handleDownVote(url) {
+    axios.post('/api/downVote', { url })
       .then((response) => {
         console.log('success');
       })
@@ -164,17 +245,61 @@ class App extends Component {
   }
 
   handleFeedTitleChange(title) {
-    console.log(title)
     this.setState({
       searchTitle: title
     })
   }
 
+  sortLinksBy(criteria) {
+    const links = this.state.linkList;
+    const crit = criteria;
+
+    const sorted = links.sort((linkA, linkB) => {
+      if (linkA[crit] < linkB[crit]) {
+        return 1;
+      } 
+      if (linkA[crit] > linkB[crit]) {
+        return -1;
+      }
+      return 0;
+    });
+
+    this.setState({
+      linkList: sorted
+    });
+  }
+
   render() {
     return (
       <div className={ styles.App }>
-        <NavBar showLogin={ this.showLogin } showAddSource={ this.showAddSource }/>
-        { this.state.showLogin ?  <Login handleLogin={ this.handleLogin } /> : null }
+        <NavBar
+          showDashboard={ this.showDashboard }
+          isLoggedIn={ this.state.isLoggedIn }
+          username={ this.state.currentUser }
+          showLogin={ this.showLogin }
+          showAddSource={ this.showAddSource }
+        />
+        <Search
+          sort={ this.sortLinksBy }
+          handleFeedTitleChange={ this.handleFeedTitleChange }
+          handleSearchByTag={ this.handleSearchByTag }
+          handleSearchByTitle={ this.handleSearchByTitle }
+        />
+        { this.state.showDashboard
+          ? (<Dashboard
+              deleteFavorites={ this.deleteFavorites }
+              favoritesList={ this.state.favoritesList }
+              hideDashboard={ this.hideDashboard }
+            />)
+          : (null)
+        }
+        { this.state.showLogin
+          ? (<Login
+              handleLogin={ this.handleLogin }
+              showLogin={ this.showLogin }
+            />)
+          : (null)
+        }
         { this.state.showAddSource
           ? (<AddSource
               handleAddSource={ this.handleAddSource }
@@ -183,8 +308,12 @@ class App extends Component {
             />)
           : (null)
         }
-        <Search handleFeedTitleChange={ this.handleFeedTitleChange } handleSearchByTag={ this.handleSearchByTag } handleSearchByTitle={ this.handleSearchByTitle }/>
-        <Feed title={ this.state.searchTitle } handleUpVote={ this.handleUpVote } linkList={ this.state.linkList } />
+        <Feed
+          title={ this.state.searchTitle }
+          handleUpVote={ this.handleUpVote }
+          handleDownVote={ this.handleDownVote }
+          linkList={ this.state.linkList }
+        />
       </div>
     );
   }

@@ -4,18 +4,18 @@ import styles from '../assets/sass/NavBar.module.scss';
 
 /* ----------- Level 2 ------------- */
 
-const NavBar = ({showLogin, showAddSource}) => {
+const NavBar = ({ showLogin, showAddSource, username, isLoggedIn, showDashboard }) => {
 	return (
 		<div className={ styles.navbar_container }>
 			<div className={styles.container }>
 				<div className={ styles.btnBar }>
-					<button className={`${ styles.btn } ${ styles.add }`} onClick={() => showAddSource()}>
+					<button className={`${ styles.btn } ${ styles.add }`} onClick={() => showAddSource() }>
 						<i className={ styles.btn__icon }>add</i>
 						<span className={ styles.btn__val }>Add</span>
 					</button>
-					<button className={ styles.btn } onClick={() => showLogin()}>
+					<button className={ styles.btn } onClick={() => !isLoggedIn ? showLogin() : showDashboard() }>
 						<i className={ styles.btn__icon }>account_box</i>
-						<span className={ styles.btn__val }>Login</span>
+						<span className={ styles.btn__val }> { username !== 'anonymous' ? username : 'Login' }</span>
 					</button>
 				</div>
 				<div className={ styles.logo }>
