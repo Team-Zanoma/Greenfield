@@ -1,0 +1,82 @@
+/* Example Styles for React Tags*/
+.ReactTags__tags {
+	position: relative;
+}
+
+/* Styles for the input */
+.ReactTags__tagInput {
+	display: block;
+	position: absolute;
+	top: 0;
+	width: 100%;
+
+	.ReactTags__tagInputField, .ReactTags__tagInputField:focus {
+		margin: 0;
+		line-height: 18px;
+		padding: 5px;
+		font-size: 16px;
+		width: 100%;
+		outline: none;
+	}
+}
+
+/* Styles for selected tags */
+.ReactTags__selected {
+	position: relative;
+	padding-top: 32px;
+
+	.ReactTags__tag {
+		background: #ccc;
+		display: inline-block;
+		margin: 5px 5px 5px 0;
+		cursor: move;
+		padding: 5px 10px;
+		border-radius: 3px;
+	}
+
+	.ReactTags__remove {
+		color: black;
+		margin-left: 5px;
+		cursor: pointer;
+	}
+}
+
+/* Styles for suggestions */
+.ReactTags__suggestions {
+	position: absolute;
+	
+	ul {
+		list-style-type: none;
+		width: auto;
+		padding:0;
+		margin: 38px 0 0 0;
+
+		&:before {
+			content: 'Suggestions:';
+			font-style: italic;
+			font-size: 14px;
+			padding-right: 5px;
+		}
+	}
+	
+	li {
+		background: #cb0814;
+		color: #fff;
+		padding: 5px 10px;
+		margin: 0 5px 0 0;
+		display: inline-block;
+		border-radius: 3px;
+		
+		mark {
+			text-decoration: underline;
+			background: none;
+			font-weight: 700;
+			color: #fff;
+		}
+
+		.ReactTags__activeSuggestion {
+			background: #b7cfe0;
+			cursor: pointer;
+		}
+	}
+}
