@@ -54,15 +54,15 @@ class Search extends Component {
             <h4>Sort by:</h4>
             <span>
               <input type="radio" id="sorting1" name="sorting" value="votes" defaultChecked={ true } />
-              <label htmlFor="contactChoice1"> Votes </label>
+              <label htmlFor="sorting1">Votes</label>
             </span>
             <span>
               <input type="radio" id="sorting2" name="sorting" value="shares" />
-              <label htmlFor="contactChoice2"> Shares </label>
+              <label htmlFor="sorting2">Shares</label>
             </span>
             <span>
-              <input type="radio" id="sorting2" name="sorting" value="addedAt" />
-            <label htmlFor="contactChoice2"> Date </label>
+              <input type="radio" id="sorting3" name="sorting" value="addedAt" />
+            <label htmlFor="sorting3">Date</label>
             </span>
           </form>
         </div>
