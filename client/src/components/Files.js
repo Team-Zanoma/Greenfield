@@ -3,9 +3,8 @@ import styles from '../assets/sass/Files.module.scss';
 
 /* ------------ Level 3 ------------ */
 
-
 const Files = ({ file, handleUpVote }) => {
-
+  
   return (
   	<li className={ styles.file_container }>
       <img src={ file.image } alt="" />
