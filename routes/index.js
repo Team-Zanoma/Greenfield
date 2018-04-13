@@ -15,6 +15,6 @@ router.get('/api/linksByDate', linkControllers.getLinksByDate);
 router.get('/api/searchByTitle', linkControllers.searchByTitle);
 router.get('/api/searchByTag', linkControllers.searchByTag);
 router.get('/api/userLinks', usersControllers.getLinksByUser);
-router.get('/api/userLinks', usersControllers.addFavorite);
+router.post('/api/userLinks', usersControllers.addFavorite);
 
 module.exports = router;
