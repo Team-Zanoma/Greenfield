@@ -25,11 +25,13 @@ class Search extends Component {
     return (
       <div className={ styles.search_container }>
         <div className={ styles.searchInput_container }>
-          <select onChange={ (event) => this.setState({ searchBy: event.target.value }) } defaultValue={''}>
-            <option value='' disabled>Search By...</option>
-            <option>Tags</option>
-            <option>Title</option>
-          </select> 
+          <div className={ styles.select }>
+            <select onChange={ (event) => this.setState({ searchBy: event.target.value }) } defaultValue={''}>
+              <option value='' disabled>Search By...</option>
+              <option>Tags</option>
+              <option>Title</option>
+            </select> 
+          </div>
           <input value={ this.state.inputValue } 
             onChange={ (event) => this.handleChange(event) } 
             type="text" placeholder={ this.state.searchBy } 
