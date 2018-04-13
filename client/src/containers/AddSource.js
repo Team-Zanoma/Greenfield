@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from '../assets/sass/AddSource.module.scss';
-import style from '../assets/sass/style.css';
+import '../assets/sass/style.scss';
 
 import { WithContext as ReactTags } from 'react-tag-input';
 import axios from 'axios';
@@ -11,19 +11,12 @@ class AddSource extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //tagNames: '',
       url: '',
       type: 'Video',
       username: this.props.user,
-      inputValue: '',   //input value for react-tag-input
-      tags: 
-        [   //'current' tags for react-tag-input
-
-        ],
-      suggestions: 
-        [   //suggested tags for react-tag-input
-            {id: 'asdf', text: 'asdf'}
-        ]
+      inputValue: '', //input value for react-tag-input
+      tags:  [], //'current' tags for react-tag-input
+      suggestions: [] //suggested tags for react-tag-input
     } 
 
     this.handleUrlChange = this.handleUrlChange.bind(this);
@@ -111,42 +104,41 @@ class AddSource extends Component {
   	return (
       <div className={ styles.addSource_overlay }>
         <div className={ styles.addSource_container }>
-         <button className={`${ styles.btn } ${ styles.close }`} onClick={ this.props.showAddSource }>
-          <i className={ styles.btn__icon }>close</i>
-         </button>
-          <div className={ styles.link_container }>
-            <label htmlFor="link">
-              <span className={ styles.label }>Share Link</span>
-              <input
-                onChange={ (event) => this.handleUrlChange(event) }
-                value={ this.state.url }
-                type="text"
-                id="link"
-                placeholder="Link"
-                required
-              />
-            </label>
-            <label htmlFor="type">
-              <span className={ styles.label } id="type">Link Type</span>
+          <button className={`${ styles.btn } ${ styles.close }`} onClick={ this.props.showAddSource }>
+            <i className={ styles.btn__icon }>close</i>
+          </button>
+          <label htmlFor="link">
+            <span className={ styles.label }>Share Link</span>
+            <input
+              onChange={ (event) => this.handleUrlChange(event) }
+              value={ this.state.url }
+              type="text"
+              id="link"
+              placeholder="Link"
+              required
+            />
+          </label>
+          <label htmlFor="type">
+            <span className={ styles.label } id="type">Link Type</span>
+            <div className={ styles.select }>
               <select onChange={ (event) => this.handleTypeChange(event) } defaultValue={''}>
                 <option value='' disabled>Resource Type</option>
                 <option value='Video'>Video</option>
                 <option value='Article'>Article</option>
               </select>
-            </label>
-           </div> 
-
-           <ReactTags
-              tags={this.state.tags}
-              suggestions={this.state.suggestions}
-              handleDelete={this.handleDelete}
-              handleAddition={this.handleAddition}
-              handleDrag={this.handleDrag}
-              handleTagClick={this.handleTagClick}
+            </div>
+          </label>
+          <label htmlFor="Suggested">
+            <span className={ styles.label } id="type">Add Tags</span>
+            <ReactTags
+              tags={ this.state.tags }
+              suggestions={ this.state.suggestions }
+              handleDelete={ this.handleDelete }
+              handleAddition={ this.handleAddition }
+              handleDrag={ this.handleDrag }
+              handleTagClick={ this.handleTagClick }
             />
-          <div className={ styles.suggestedTags_container }>
-
-          </div>
+          </label>
           <div className={ styles.btnBar }>
             <button
               onClick={ () => this.props.handleAddSource(this.state.tags, this.state.url, this.state.type, this.state.username) }
