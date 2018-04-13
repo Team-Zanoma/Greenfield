@@ -123,9 +123,17 @@ class App extends Component {
   }
 
  
-  showDashboard(){
+  showDashboard() {
     this.setState({
       showDashboard: !this.state.showDashboard
+    })
+
+    axios.get('/api/userLinks', {params: {username: this.state.currentUser}})
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
     })
   }
 
@@ -164,6 +172,15 @@ class App extends Component {
 
 
   handleUpVote(url) {
+
+    axios.post('/api/userLinks', {username: this.state.currentUser, url})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+  
     axios.post('/api/upvote', { url })
       .then((response) => {
         console.log('success');
