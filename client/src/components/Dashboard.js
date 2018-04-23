@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../assets/sass/AddSource.module.scss';
+import styles from '../assets/sass/AddSource.module.scss'; 
 import styles2 from '../assets/sass/Feed.module.scss';
 import styles3 from '../assets/sass/Files.module.scss';
 

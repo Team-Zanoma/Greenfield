@@ -16,11 +16,20 @@ class Search extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  // Change state of input value as user types
   handleChange(event) {
     this.setState({
       inputValue: event.target.value
     });
   }
+
+  /*
+    Main parts of render():
+    1.) Drop down to filter search by (tags or title)
+    2.) Input field to search for source
+    3.) Button to submit search request
+    4.) Radio buttons to filer sources by certain criteria
+  */
 
   render() {
     return (

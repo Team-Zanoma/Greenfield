@@ -15,23 +15,26 @@ class Login extends Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.loginSubmit = this.loginSubmit.bind(this);
   }
-
+  
+  // Change state of username input as user types
   handleUserChange(event) {
     this.setState({
       username: event.target.value
     })
   }
-
+  // Change state of email input
   handleEmailChange(event) {
     this.setState({
       email: event.target.value
     })
   }
-
+  
+  // Called when user clicks 'Login' button
   loginSubmit(event) {
     event.preventDefault();
     this.props.handleLogin(this.state.username, this.state.email);
   }
+
 
   render() {
   	return (

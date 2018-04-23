@@ -15,9 +15,9 @@ class AddSource extends Component {
       url: '',
       type: 'Video',
       username: this.props.user,
-      inputValue: '', //input value for react-tag-input
-      tags:  [], //'current' tags for react-tag-input
-      suggestions: [] //suggested tags for react-tag-input
+      inputValue: '', //input value for react-tag-input that you type in the input form
+      tags:  [], //'current' tags for react-tag-input, aka the tags that lock into place when you press ENTER
+      suggestions: [] //suggested tags for react-tag-input, aka the tags that appear underneath the form
     } 
 
     this.handleUrlChange = this.handleUrlChange.bind(this);
@@ -73,7 +73,7 @@ class AddSource extends Component {
     })
   }
 
-  //Pre-Built Methods for React-Tags-Input
+  //Four Pre-Built Methods for React-Tags-Input
   handleDelete(i) {
     console.log('deleted index: ', i)
     this.setState({
