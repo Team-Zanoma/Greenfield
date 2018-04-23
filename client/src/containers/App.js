@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from '../assets/sass/App.module.scss';
+import styles from '../assets/sass/App.module.scss'; 
 import Feed from '../components/Feed.js';
 import Search from './Search.js';
 import NavBar from '../components/NavBar.js';
@@ -14,16 +14,18 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showLogin: false,
-      showAddSource: false,
-      showDashboard: false,
-      linkList: [],
-      favoritesList: [],
-      username: [],
-      currentUser: 'anonymous',
-      isLoggedIn: false,
-      searchTitle: 'Most Popular'
+      showLogin: false, // Boolean to show/hide 'Login'
+      showAddSource: false, // show/hide 'AddSource'
+      showDashboard: false, // show/hide 'Dashboard'
+      linkList: [], // Contains all links sent back from server
+      favoritesList: [], // all favorites sent back from server
+      username: [], // holds single username value
+      currentUser: 'anonymous', // Username is initially anonymous before logging in
+      isLoggedIn: false, 
+      searchTitle: 'Most Popular' //Sources initially render by most popular
     }
+
+
 
     this.getAllinks = this.getAllinks.bind(this);
     this.showLogin = this.showLogin.bind(this);
@@ -37,7 +39,7 @@ class App extends Component {
 
     this.handleSearchByTag = this.handleSearchByTag.bind(this);
     this.handleSearchByTitle = this.handleSearchByTitle.bind(this);
-
+     
     this.handleAddSource = this.handleAddSource.bind(this);
     this.handleUpVote = this.handleUpVote.bind(this);
     this.handleDownVote = this.handleDownVote.bind(this);
@@ -45,6 +47,13 @@ class App extends Component {
     this.sortLinksBy = this.sortLinksBy.bind(this);
   }
 
+  /*
+    WARNING: Do not change format GET/POST Requests
+    - Changing the way paramaters are sent up will throw off queries to db
+  */
+  
+  // Triggers tagsController .getTags function...
+  // returns all sources that match search bar value
   getAllinks() {
     axios.get('/api/links')
       .then((response) => {
@@ -57,6 +66,7 @@ class App extends Component {
       }
     );
   }
+  
 
   handleSearchByTag(tag) {
     if (tag === '') {
@@ -124,7 +134,6 @@ class App extends Component {
 
   componentDidMount() {
     this.getAllinks();
-    // this.getUsername();
   }
 
   hideDashboard() {
@@ -150,8 +159,9 @@ class App extends Component {
       favoritesList: linksArr
     })
   }
-
+  
   getUserFavorites() {
+    // sending up username, to get favorites for each individual user
     axios.get('/api/userLinks', {params: {username: this.state.currentUser}})
     .then((results) => {
       this.filterLinks(results);
@@ -169,6 +179,7 @@ class App extends Component {
   }
 
   deleteFavorites(linkId) {
+    // When star is clicked, send up linkID and user to delete from db
     axios.post('/api/deleteFav', { linkId, username: this.state.currentUser })
     .then((results) => {
       this.getUserFavorites();
@@ -214,7 +225,6 @@ class App extends Component {
 
 
   handleUpVote(url) {
-    console.log('upVoting')
     axios.post('/api/userLinks', {username: this.state.currentUser, url})
     .then((response) => {
       console.log(response);
@@ -268,6 +278,21 @@ class App extends Component {
       linkList: sorted
     });
   }
+
+  /*
+  Components that may confuse you:
+  1.) Search - Search bar on main page, contains filters for search criteria
+  2.) Dashboard - This component pops up when the user clicks the 'Favorites' button
+                  Can Delete favroites from this component
+  3.) AddSource - This component pops up when you click the 'Add' button. 
+                  Gives you the ability to paste links in, choose link type, and add tag
+                  Holds ReactTags Component - holds prebuilt functionality for drag and drop, auto complete, and suggestions
+  
+  Other components should be self-explanatory while viewing the page: https://hrnyc14-devterest.herokuapp.com/
+  - Hit us up if you have any questions... happy to help
+  */
+
+
 
   render() {
     return (
